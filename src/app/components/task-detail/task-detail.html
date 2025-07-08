@@ -1,0 +1,64 @@
+<div class="task-details-container">
+  <div class="task-details">
+    @if (task(); as taskData) {
+      <div class="task-details__header">
+        <a class="task-details__link" routerLink="/tasks">Назад</a>
+        <h2 class="task-details__title">Детали задачи</h2>
+      </div>
+
+      <div class="task-details__info">
+        <app-task-header
+          [task]="taskData"
+          [isEditing]="editingTaskId() === taskData.id"
+          (toggleComplete)="toggleComplete(taskData, $event)"
+          (editClick)="editTask(taskData)"
+          (remove)="removeTask(taskData.id)"
+          (titleChange)="taskData.title = $event"
+          (save)="saveTask(taskData)"
+        ></app-task-header>
+
+
+        @if (editingTaskId() === taskData.id) {
+          <textarea
+            class="task-details__description-edit"
+            placeholder="Описание задачи"
+            [(ngModel)]="taskData.description"
+            (input)="autoResize($event)"
+          ></textarea>
+        } @else {
+          <div class="task-details__description-display">
+            {{ taskData.description || 'Нет описания' }}
+          </div>
+        }
+
+        <div class="task-details__property-container">
+          <p class="task-details__property">
+            Статус:
+            <span class="task-details__status"
+                  [class.task-details__status--completed]="taskData.isCompleted"
+                  [class.task-details__status--in-progress]="!taskData.isCompleted">
+              {{ taskData.isCompleted ? 'Завершена' : 'В работе' }}
+            </span>
+          </p>
+          <p class="task-details__property task-details__property--id">ID: {{ taskData.id }}</p>
+        </div>
+      </div>
+
+
+      <div class="task-meta__time-container">
+        <div class="task-meta__time-item">
+          <label class="task-meta__label">Date of create:</label>
+          <time class="task-meta__value">{{ taskData.createdAt | date:'dd.MM.yyyy HH:mm'  }}</time>
+        </div>
+        <div class="task-meta__time-item">
+          <label class="task-meta__label">Deadline:</label>
+          <time class="task-meta__value">{{ taskData.deadLine | date:'dd.MM.yyyy HH:mm' }}</time>
+        </div>
+      </div>
+    }
+
+    @if (!task()) {
+      <p class="task-details__not-found">Задача не найдена</p>
+    }
+  </div>
+</div>

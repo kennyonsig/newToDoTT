@@ -1,0 +1,23 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form">
+  <input
+    class="task-form__input"
+    formControlName="title"
+    type="text"
+    placeholder="Заголовок задачи"
+    [class.task-form__input--invalid]="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
+  <input
+    class="task-form__input"
+    formControlName="description"
+    type="text"
+    placeholder="Полное описание">
+  <input
+    class="task-form__input"
+    formControlName="deadline"
+    type="datetime-local"
+    placeholder="Срок выполнения"
+    [class.task-form__input--invalid]="taskForm.get('deadline')?.invalid && taskForm.get('deadline')?.touched">
+  <button
+    class="task-form__button"
+    type="submit"
+    [disabled]="!taskForm.valid">Добавить задачу</button>
+</form>

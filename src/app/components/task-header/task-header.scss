@@ -1,0 +1,87 @@
+.task-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+
+  &__title {
+    flex-grow: 1;
+    margin: 0 16px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+
+    &-input {
+      width: 73%;
+      padding: 8px 12px;
+      border: 2px solid #42a5f5;
+      border-radius: 4px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: #1976d2;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    mat-icon {
+      font-size: 20px;
+      color: #555;
+    }
+
+    &:hover {
+      background: #f5f5f5;
+    }
+
+    &--edit:hover mat-icon {
+      color: #1976d2;
+    }
+
+    &--delete:hover mat-icon {
+      color: #d32f2f;
+    }
+
+    &--more:hover mat-icon {
+      color: #42a5f5;
+    }
+  }
+}
+
+.task__status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 14px;
+
+  &--completed {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &--in-progress {
+    background: #fff8e1;
+    color: #f57c00;
+  }
+}

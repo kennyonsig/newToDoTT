@@ -1,0 +1,31 @@
+<ul class="tasks">
+  @for (task of tasks(); track task.id) {
+    <li class="tasks__item">
+      <app-task-header
+        [task]="task"
+        [isEditing]="editingTaskId() === task.id"
+        (toggleComplete)="toggleComplete(task, $event)"
+        (editClick)="editTask(task)"
+        (remove)="removeTask(task.id)"
+        (titleChange)="task.title = $event"
+        (save)="saveTask(task)"
+      ></app-task-header>
+
+      <app-task-meta [task]="task"></app-task-meta>
+    </li>
+  }
+
+  @if (isOpenForm || hasNoTasks ) {
+    <li class="tasks__form">
+      <app-task-form></app-task-form>
+    </li>
+  }
+
+  @if (!hasNoTasks) {
+    <li class="tasks__actions">
+      <button class="tasks__toggle-btn" (click)="openForm()">
+        <mat-icon>{{ !isOpenForm ? 'add' : 'clear' }}</mat-icon>
+      </button>
+    </li>
+  }
+</ul>

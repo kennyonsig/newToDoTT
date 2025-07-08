@@ -1,0 +1,37 @@
+.task-meta {
+  padding: 0 16px;
+  font-size: 14px;
+
+  &__time {
+    display: flex;
+    justify-content: space-between;
+
+    &-container {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  &__time-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  &__more {
+    color: black;
+
+    &:hover {
+      color: #0505fc;
+    }
+  }
+}
+
+label {
+  font-weight: 500;
+  color: #555;
+}
+
+time {
+  color: #666;
+}
