@@ -1,36 +1,39 @@
-<ul class="tasks">
-  <li>
-    <app-search-input
+<div class="container">
+  <app-search-input class="tasks-search"
       (searchTask)="findTask($event)">
-    </app-search-input>
-  </li>
-  @for (task of tasks(); track task.id) {
-    <li class="tasks__item">
-      <app-task-header
-        [task]="task"
-        [isEditing]="editingTaskId() === task.id"
-        (toggleComplete)="toggleComplete(task, $event)"
-        (editClick)="editTask(task)"
-        (remove)="removeTask(task.id)"
-        (titleChange)="task.title = $event"
-        (save)="saveTask(task)"
-      ></app-task-header>
+  </app-search-input>
 
-      <app-task-meta [task]="task"></app-task-meta>
-    </li>
-  }
+  <ul class="tasks">
+
+    @for (task of tasks(); track task.id) {
+      <li class="tasks__item">
+        <app-task-header
+          [task]="task"
+          [isEditing]="editingTaskId() === task.id"
+          (toggleComplete)="toggleComplete(task, $event)"
+          (editClick)="editTask(task)"
+          (remove)="removeTask(task.id)"
+          (titleChange)="task.title = $event"
+          (save)="saveTask(task)"
+        ></app-task-header>
+
+        <app-task-meta [task]="task"></app-task-meta>
+      </li>
+    }
+
+  </ul>
 
   @if (isOpenForm || hasNoTasks ) {
-    <li class="tasks__form">
+    <div class="tasks__form">
       <app-task-form></app-task-form>
-    </li>
+    </div>
   }
 
   @if (!hasNoTasks) {
-    <li class="tasks__actions">
+    <div class="tasks__actions">
       <button class="tasks__toggle-btn" (click)="openForm()">
         <mat-icon>{{ !isOpenForm ? 'add' : 'clear' }}</mat-icon>
       </button>
-    </li>
+    </div>
   }
-</ul>
+</div>

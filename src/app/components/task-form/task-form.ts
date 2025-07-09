@@ -1,7 +1,24 @@
 import { Component, inject } from '@angular/core';
 import { TaskService } from '../../services/task-service';
 import { TaskItem } from '../../interface/task';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from '@angular/forms';
+
+
+function minDateValidator(control: AbstractControl): ValidationErrors | null {
+  const selectedDate = new Date(control.value);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  return selectedDate < today ? { minDate: true } : null;
+}
 
 @Component({
   selector: 'app-task-form',
@@ -14,11 +31,14 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class TaskForm {
   taskService = inject(TaskService)
+  today = new Date().toISOString().slice(0, 16);
 
   taskForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
     description: new FormControl(''),
-    deadline: new FormControl('', [Validators.required])
+    deadline: new FormControl(this.today, [
+      Validators.required,
+      minDateValidator])
   });
 
   onSubmit() {
@@ -34,6 +54,8 @@ export class TaskForm {
     };
 
     this.taskService.addTask(newTask);
-    this.taskForm.reset();
+    this.taskForm.reset({
+      deadline: this.today
+    });
   }
 }

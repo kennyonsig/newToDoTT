@@ -19,7 +19,7 @@
   <p class="task__status">
     <span [class.task__status--completed]="task.isCompleted"
           [class.task__status--in-progress]="!task.isCompleted">
-      {{ task.isCompleted ? 'Завершена' : 'В работе' }}
+      {{ task.isCompleted ? 'Завершена' : 'Выполняется' }}
     </span>
   </p>
   <div class="task-header__actions">
