@@ -18,17 +18,18 @@ import { MatIcon } from '@angular/material/icon';
 export class TaskHeader  {
   @Input() task!: TaskItem;
   @Input() isEditing!: boolean;
+
   @Output() toggleComplete = new EventEmitter<boolean>();
   @Output() editClick = new EventEmitter<void>();
   @Output() remove = new EventEmitter<void>();
   @Output() titleChange = new EventEmitter<string>();
   @Output() save = new EventEmitter<void>();
 
+  editingTitle = '';
 
   onStartEditing() {
-    if (!this.isEditing) {
-      this.editClick.emit();
-    }
+    this.editingTitle = this.task.title;
+    this.editClick.emit();
   }
 }
 

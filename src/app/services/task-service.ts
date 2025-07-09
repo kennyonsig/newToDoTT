@@ -1,4 +1,4 @@
-import { effect, Injectable, signal } from '@angular/core';
+import { computed, effect, Injectable, signal } from '@angular/core';
 import { TaskItem } from '../interface/task';
 
 @Injectable({
@@ -8,6 +8,7 @@ export class TaskService {
   tasks = signal<TaskItem[]>([]);
   storageKey = 'tasks';
   editingTaskId = signal<number | null>(null);
+  searchQuery = signal('');
 
   constructor() {
     this.loadFromStorage();
@@ -78,7 +79,15 @@ export class TaskService {
     return this.tasks().find(t => t.id === id);
   }
 
-  filteredTask(value:string) {
-    console.log(value)
+  filteredTasks = computed(() => {
+    const query = this.searchQuery().toLowerCase();
+    if (!query) return this.tasks();
+
+    return this.tasks().filter(task =>
+      task.title.toLowerCase().includes(query));
+  });
+
+  setSearchQuery(query: string) {
+    this.searchQuery.set(query);
   }
 }

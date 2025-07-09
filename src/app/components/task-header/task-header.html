@@ -1,7 +1,7 @@
 <div class="task-header">
   <mat-checkbox
-    [ngModel]="task.isCompleted"
-    (ngModelChange)="toggleComplete.emit($event)"
+    [checked]="task.isCompleted"
+    (change)="toggleComplete.emit($event.checked)"
   ></mat-checkbox>
 
   @if (!isEditing) {
@@ -16,11 +16,12 @@
       (keyup.enter)="save.emit()"
     >
   }
-  <span class="task__status"
-        [class.task__status--completed]="task.isCompleted"
-        [class.task__status--in-progress]="!task.isCompleted">
+  <p class="task__status">
+    <span [class.task__status--completed]="task.isCompleted"
+          [class.task__status--in-progress]="!task.isCompleted">
       {{ task.isCompleted ? 'Завершена' : 'В работе' }}
-  </span>
+    </span>
+  </p>
   <div class="task-header__actions">
     <button (click)="editClick.emit()" class="task-header__btn task-header__btn--edit">
       <mat-icon>{{ isEditing ? 'save' : 'edit' }}</mat-icon>

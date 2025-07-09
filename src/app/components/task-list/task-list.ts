@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, } from '@angular/core';
+import { Component, inject, OnInit} from '@angular/core';
 import { TaskService } from '../../services/task-service';
 import { MatIconModule } from '@angular/material/icon'
 import { TaskItem } from '../../interface/task';
@@ -24,13 +24,14 @@ import { SearchInput } from '../../shared/search-input/search-input';
 })
 export class TaskList implements OnInit {
   taskService = inject(TaskService);
-  tasks = this.taskService.tasks;
+  tasks = this.taskService.filteredTasks;
   editingTaskId = this.taskService.editingTaskId;
 
   isOpenForm = false;
 
   ngOnInit() {
     this.isOpenForm = this.hasNoTasks;
+    this.taskService.setSearchQuery('');
   }
 
   removeTask(taskId: number) {
@@ -58,7 +59,7 @@ export class TaskList implements OnInit {
     this.isOpenForm = !this.isOpenForm;
   }
 
-  findTask(searchTerm: string) {
-    this.taskService.filteredTask(searchTerm.trim());
+  findTask(searchQuery: string) {
+    this.taskService.setSearchQuery(searchQuery)
   }
 }

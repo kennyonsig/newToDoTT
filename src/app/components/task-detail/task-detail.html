@@ -19,6 +19,7 @@
 
 
         @if (editingTaskId() === taskData.id) {
+          <h3 class="task-details__description-h3">Описание: </h3>
           <textarea
             class="task-details__description-edit"
             placeholder="Описание задачи"
@@ -26,22 +27,12 @@
             (input)="autoResize($event)"
           ></textarea>
         } @else {
+          <h3 class="task-details__description-h3">Описание: </h3>
           <div class="task-details__description-display">
             {{ taskData.description || 'Нет описания' }}
           </div>
         }
 
-        <div class="task-details__property-container">
-          <p class="task-details__property">
-            Статус:
-            <span class="task-details__status"
-                  [class.task-details__status--completed]="taskData.isCompleted"
-                  [class.task-details__status--in-progress]="!taskData.isCompleted">
-              {{ taskData.isCompleted ? 'Завершена' : 'В работе' }}
-            </span>
-          </p>
-          <p class="task-details__property task-details__property--id">ID: {{ taskData.id }}</p>
-        </div>
       </div>
 
 
@@ -55,6 +46,8 @@
           <time class="task-meta__value">{{ taskData.deadLine | date:'dd.MM.yyyy HH:mm' }}</time>
         </div>
       </div>
+
+      <p class="task-details__property--id">ID: {{ taskData.id }}</p>
     }
 
     @if (!task()) {
