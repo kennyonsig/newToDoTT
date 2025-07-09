@@ -1,4 +1,4 @@
-import { Component, inject, OnInit,} from '@angular/core';
+import { Component, inject, OnInit, signal, } from '@angular/core';
 import { TaskService } from '../../services/task-service';
 import { MatIconModule } from '@angular/material/icon'
 import { TaskItem } from '../../interface/task';
@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TaskHeader } from '../task-header/task-header';
 import { TaskMeta } from '../task-meta/task-meta';
 import { TaskForm } from '../task-form/task-form';
+import { SearchInput } from '../../shared/search-input/search-input';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { TaskForm } from '../task-form/task-form';
     TaskHeader,
     TaskMeta,
     TaskForm,
+    SearchInput,
   ],
   templateUrl: './task-list.html',
   styleUrl: './task-list.scss'
@@ -52,7 +54,11 @@ export class TaskList implements OnInit {
     return !savedTasks || JSON.parse(savedTasks).length === 0;
   }
 
-  openForm(){
+  openForm() {
     this.isOpenForm = !this.isOpenForm;
+  }
+
+  findTask(searchTerm: string) {
+    this.taskService.filteredTask(searchTerm.trim());
   }
 }

@@ -24,9 +24,6 @@ export class TaskHeader  {
   @Output() titleChange = new EventEmitter<string>();
   @Output() save = new EventEmitter<void>();
 
-  onTitleChange(title: string) {
-    this.titleChange.emit(title);
-  }
 
   onStartEditing() {
     if (!this.isEditing) {

@@ -1,4 +1,9 @@
 <ul class="tasks">
+  <li>
+    <app-search-input
+      (searchTask)="findTask($event)">
+    </app-search-input>
+  </li>
   @for (task of tasks(); track task.id) {
     <li class="tasks__item">
       <app-task-header

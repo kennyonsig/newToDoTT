@@ -11,8 +11,8 @@
     <input
       class="task-header__title-input"
       type="text"
-      [ngModel]="task.title"
-      (ngModelChange)="onTitleChange($event)"
+      [(ngModel)]="task.title"
+      (ngModelChange)="titleChange.emit(task.title)"
       (keyup.enter)="save.emit()"
     >
   }

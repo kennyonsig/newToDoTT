@@ -77,4 +77,8 @@ export class TaskService {
   getTaskById(id: number) {
     return this.tasks().find(t => t.id === id);
   }
+
+  filteredTask(value:string) {
+    console.log(value)
+  }
 }
