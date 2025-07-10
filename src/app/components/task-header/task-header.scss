@@ -15,23 +15,6 @@
     cursor: text;
     position: relative;
 
-    &:hover::after {
-      opacity: 1;
-    }
-
-    &::after {
-      content: "(дважды кликните для редактирования)";
-      position: absolute;
-      right: 4px;
-      opacity: 0;
-      font-size: 0.7em;
-      top: 20px;
-      white-space: nowrap;
-      transition: all 0.3s ease;
-      pointer-events: none;
-      color: rgba(0, 0, 0, 0.47);
-    }
-
     &-input {
       width: 50%;
       padding: 8px 12px;
