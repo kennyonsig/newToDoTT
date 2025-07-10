@@ -3,6 +3,7 @@ import { MatCheckbox } from "@angular/material/checkbox";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TaskItem } from '../../interface/task';
 import { MatIcon } from '@angular/material/icon';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-task-header',
@@ -11,6 +12,8 @@ import { MatIcon } from '@angular/material/icon';
     MatIcon,
     ReactiveFormsModule,
     FormsModule,
+    MatTooltip,
+    MatTooltipModule
   ],
   templateUrl: './task-header.html',
   styleUrl: './task-header.scss'
@@ -18,6 +21,8 @@ import { MatIcon } from '@angular/material/icon';
 export class TaskHeader  {
   @Input() task!: TaskItem;
   @Input() isEditing!: boolean;
+
+  value = 'Двойной клик для редактиования'
 
   @Output() toggleComplete = new EventEmitter<boolean>();
   @Output() editClick = new EventEmitter<void>();

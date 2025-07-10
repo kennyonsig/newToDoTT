@@ -1,6 +1,7 @@
 .task-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 12px 16px;
   background: #fff;
   border-radius: 8px;
@@ -8,7 +9,7 @@
   transition: all 0.3s ease;
 
   &__title {
-    flex-basis: 70%;
+    flex-grow: 1;
     margin-left: 16px;
     font-size: 18px;
     font-weight: 500;
@@ -17,6 +18,7 @@
 
     &-input {
       width: 50%;
+      flex-grow: 1;
       padding: 8px 12px;
       border: 2px solid #42a5f5;
       border-radius: 4px;

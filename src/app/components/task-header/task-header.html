@@ -5,7 +5,12 @@
   ></mat-checkbox>
 
   @if (!isEditing) {
-    <h3 class="task-header__title" (dblclick)="onStartEditing()">{{ task.title }}</h3>
+    <h3 class="task-header__title"
+        [matTooltip]="value"
+        matTooltipClass="custom-tooltip"
+        (dblclick)="onStartEditing()">
+      {{ task.title }}
+    </h3>
 
   } @else {
     <input
