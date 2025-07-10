@@ -7,6 +7,8 @@ import { TaskHeader } from '../task-header/task-header';
 import { TaskMeta } from '../task-meta/task-meta';
 import { TaskForm } from '../task-form/task-form';
 import { SearchInput } from '../../shared/search-input/search-input';
+import { RouterLink } from '@angular/router';
+import { MatTooltip } from '@angular/material/tooltip';
 
 
 @Component({
@@ -18,6 +20,8 @@ import { SearchInput } from '../../shared/search-input/search-input';
     TaskMeta,
     TaskForm,
     SearchInput,
+    RouterLink,
+    MatTooltip
   ],
   templateUrl: './task-list.html',
   styleUrl: './task-list.scss'
@@ -26,7 +30,7 @@ export class TaskList implements OnInit {
   taskService = inject(TaskService);
   tasks = this.taskService.filteredTasks;
   editingTaskId = this.taskService.editingTaskId;
-
+  valueTip = 'Добавить задачу'
   isOpenForm = false;
 
   ngOnInit() {

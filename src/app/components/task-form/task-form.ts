@@ -49,6 +49,7 @@ export class TaskForm {
       title: this.taskForm.value.title!,
       description: this.taskForm.value.description ?? '',
       isCompleted: false,
+      inProgress: false,
       createdAt: new Date(),
       deadLine: new Date(this.taskForm.value.deadline!),
     };

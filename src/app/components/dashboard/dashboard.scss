@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  gap: 25px;
+  align-items: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+a {
+  text-align: center;
+  background-color: white;
+  width: 200px;
+  padding: 10px;
+  border-radius: 4px;
+  color: black;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: lightgray;
+  }
+}
+
+.list-container {
+  width: 400px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.tasks-list {
+  border: solid 1px #ccc;
+  min-height: 60px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}
+
+.tasks-list-box {
+  border-bottom: solid 1px #ccc;
+  cursor: move;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  background-color: #ffffff;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.tasks-list-box:last-child {
+  border: none;
+}
+
+.tasks-list.cdk-drop-list-dragging .tasks-list-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

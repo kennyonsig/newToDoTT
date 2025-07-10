@@ -6,7 +6,10 @@ import { TaskItem } from '../interface/task';
 })
 export class TaskService {
   tasks = signal<TaskItem[]>([]);
-  storageKey = 'tasks';
+  progressTasks = signal<TaskItem[]>([]);
+  completedTasks = signal<TaskItem[]>([]);
+
+  storageKey = ['tasks', 'progress', 'completed'];
   editingTaskId = signal<number | null>(null);
   searchQuery = signal('');
 
@@ -14,20 +17,20 @@ export class TaskService {
     this.loadFromStorage();
 
     effect(() => {
-      localStorage.setItem(this.storageKey, JSON.stringify(this.tasks()));
+      localStorage.setItem(this.storageKey[0], JSON.stringify(this.tasks()));
+      localStorage.setItem(this.storageKey[1], JSON.stringify(this.progressTasks()));
+      localStorage.setItem(this.storageKey[2], JSON.stringify(this.completedTasks()));
     });
   }
 
   loadFromStorage() {
-    const savedTasks = localStorage.getItem(this.storageKey);
-    if (savedTasks) {
-      try {
-        this.tasks.set(JSON.parse(savedTasks));
-      } catch (error) {
-        console.error('Failed to parse saved tasks', error);
-        this.tasks.set([]);
-      }
-    }
+    const savedTasks = localStorage.getItem(this.storageKey[0]);
+    const savedProgress = localStorage.getItem(this.storageKey[1]);
+    const savedCompleted = localStorage.getItem(this.storageKey[2]);
+
+    if (savedTasks) this.tasks.set(JSON.parse(savedTasks));
+    if (savedProgress) this.progressTasks.set(JSON.parse(savedProgress));
+    if (savedCompleted) this.completedTasks.set(JSON.parse(savedCompleted));
   }
 
   addTask(task: TaskItem) {
@@ -36,6 +39,8 @@ export class TaskService {
 
   removeTask(id: number) {
     this.tasks.update(tasks => tasks.filter(task => task.id !== id));
+    this.progressTasks.update(tasks => tasks.filter(task => task.id !== id));
+    this.completedTasks.update(tasks => tasks.filter(task => task.id !== id));
     if (this.editingTaskId() === id) {
       this.editingTaskId.set(null);
     }
@@ -48,7 +53,7 @@ export class TaskService {
   }
 
   getTasksStorage() {
-    return localStorage.getItem(this.storageKey)
+    return localStorage.getItem(this.storageKey[0])
   }
 
   saveTask(task: TaskItem): void {

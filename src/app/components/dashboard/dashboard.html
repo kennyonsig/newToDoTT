@@ -1,0 +1,82 @@
+<div class="wrapper">
+  <a routerLink="/tasks">Все задачи</a>
+  <div class="container">
+    <div class="list-container">
+      <h2>ToDo</h2>
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="tasks()"
+        [cdkDropListConnectedTo]="[doneList, progressList]"
+        class="tasks-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (task of tasks(); track task.id) {
+          <div class="tasks-list-box" cdkDrag>
+            <app-task-header
+              [task]="task"
+              [isEditing]="editingTaskId() === task.id"
+              (toggleComplete)="toggleComplete(task, $event)"
+              (editClick)="editTask(task)"
+              (remove)="removeTask(task.id)"
+              (titleChange)="task.title = $event"
+              (save)="saveTask(task)"
+            ></app-task-header>
+            <app-task-meta [task]="task" class="task-meta"></app-task-meta>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="list-container">
+      <h2>In Progress</h2>
+      <div
+        cdkDropList
+        #progressList="cdkDropList"
+        [cdkDropListData]="progressTasks()"
+        [cdkDropListConnectedTo]="[todoList, doneList]"
+        class="tasks-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (task of progressTasks(); track task.id) {
+          <div class="tasks-list-box" cdkDrag>
+            <app-task-header
+              [task]="task"
+              [isEditing]="editingTaskId() === task.id"
+              (toggleComplete)="toggleComplete(task, $event)"
+              (editClick)="editTask(task)"
+              (remove)="removeTask(task.id)"
+              (titleChange)="task.title = $event"
+              (save)="saveTask(task)"
+            ></app-task-header>
+            <app-task-meta [task]="task"></app-task-meta>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="list-container">
+    <h2>Done</h2>
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="completedTasks()"
+      [cdkDropListConnectedTo]="[todoList, progressList]"
+      class="tasks-list"
+      (cdkDropListDropped)="drop($event)">
+      @for (task of completedTasks(); track task.id) {
+        <div class="tasks-list-box" cdkDrag>
+          <app-task-header
+            [task]="task"
+            [isEditing]="editingTaskId() === task.id"
+            (toggleComplete)="toggleComplete(task, $event)"
+            (editClick)="editTask(task)"
+            (remove)="removeTask(task.id)"
+            (titleChange)="task.title = $event"
+            (save)="saveTask(task)"
+          ></app-task-header>
+          <app-task-meta [task]="task"></app-task-meta>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+</div>

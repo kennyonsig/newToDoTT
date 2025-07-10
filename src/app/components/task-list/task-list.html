@@ -1,12 +1,11 @@
 <div class="container">
+
   <app-search-input class="tasks-search"
-      (searchTask)="findTask($event)">
+        (searchTask)="findTask($event)">
   </app-search-input>
-
-  <ul class="tasks">
-
+  <div class="tasks">
     @for (task of tasks(); track task.id) {
-      <li class="tasks__item">
+      <div class="tasks__item">
         <app-task-header
           [task]="task"
           [isEditing]="editingTaskId() === task.id"
@@ -18,10 +17,10 @@
         ></app-task-header>
 
         <app-task-meta [task]="task"></app-task-meta>
-      </li>
+      </div>
     }
 
-  </ul>
+  </div>
 
   @if (isOpenForm || hasNoTasks ) {
     <div class="tasks__form">
@@ -31,9 +30,10 @@
 
   @if (!hasNoTasks) {
     <div class="tasks__actions">
-      <button class="tasks__toggle-btn" (click)="openForm()">
+      <button [matTooltip]="valueTip" class="tasks__toggle-btn" matTooltipClass="custom-tooltip" (click)="openForm()">
         <mat-icon>{{ !isOpenForm ? 'add' : 'clear' }}</mat-icon>
       </button>
+      <a routerLink="/dashboard">Доска задач</a>
     </div>
   }
 </div>
