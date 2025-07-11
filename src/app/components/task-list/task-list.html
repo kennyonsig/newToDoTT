@@ -23,15 +23,16 @@
   </div>
 
   @if (isOpenForm || hasNoTasks ) {
-    <div class="tasks__form">
-      <app-task-form></app-task-form>
+    <div class="tasks__form" tuiAnimated>
+      <app-task-form (closeForm)="openForm()"></app-task-form>
     </div>
   }
 
-  @if (!hasNoTasks) {
+
+  @if (!hasNoTasks && !isOpenForm) {
     <div class="tasks__actions">
       <button [matTooltip]="valueTip" class="tasks__toggle-btn" matTooltipClass="custom-tooltip" (click)="openForm()">
-        <mat-icon>{{ !isOpenForm ? 'add' : 'clear' }}</mat-icon>
+        <mat-icon>add</mat-icon>
       </button>
       <a routerLink="/dashboard">Доска задач</a>
     </div>

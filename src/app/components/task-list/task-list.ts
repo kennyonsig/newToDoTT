@@ -9,7 +9,7 @@ import { TaskForm } from '../task-form/task-form';
 import { SearchInput } from '../../shared/search-input/search-input';
 import { RouterLink } from '@angular/router';
 import { MatTooltip } from '@angular/material/tooltip';
-
+import { TuiAnimated } from '@taiga-ui/cdk';
 
 @Component({
   selector: 'app-task-list',
@@ -21,10 +21,11 @@ import { MatTooltip } from '@angular/material/tooltip';
     TaskForm,
     SearchInput,
     RouterLink,
-    MatTooltip
+    MatTooltip,
+    TuiAnimated
   ],
   templateUrl: './task-list.html',
-  styleUrl: './task-list.scss'
+  styleUrl: './task-list.scss',
 })
 export class TaskList implements OnInit {
   taskService = inject(TaskService);

@@ -1,35 +1,42 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form">
-  <label for="task-title">Задача</label>
-  <input
-    id="task-title"
-    class="task-form__input"
-    formControlName="title"
-    type="text"
-    placeholder="Заголовок задачи"
-    [class.task-form__input--invalid]="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
+<div class="task-form-container">
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form" >
+    <button class="task-form__toggle-btn" (click)="closeForm.emit()" type="button" aria-label="Добавить задачу">
+      <mat-icon>clear</mat-icon>
+    </button>
 
-  <label for="task-description">Описание</label>
-  <input
-    id="task-description"
-    class="task-form__input"
-    formControlName="description"
-    type="text"
-    placeholder="Полное описание">
+    <label for="task-title">Задача</label>
+    <input
+      id="task-title"
+      class="task-form__input"
+      formControlName="title"
+      type="text"
+      placeholder="Заголовок задачи"
+      [class.task-form__input--invalid]="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
 
-  <label for="deadline">Дедлайн</label>
-  <input
-    id="deadline"
-    class="task-form__input"
-    formControlName="deadline"
-    type="datetime-local"
-    placeholder="Срок выполнения"
-    [min]="today"
-    [class.task-form__input--invalid]="taskForm.get('deadline')?.invalid && taskForm.get('deadline')?.touched">
-  @if (taskForm.get('deadline')?.errors?.['minDate']) {
-    <p>Дата не может быть раньше сегодняшнего дня</p>
-  }
-  <button
-    class="task-form__button"
-    type="submit"
-    [disabled]="!taskForm.valid">Добавить задачу</button>
-</form>
+    <label for="task-description">Описание</label>
+    <input
+      id="task-description"
+      class="task-form__input"
+      formControlName="description"
+      type="text"
+      placeholder="Полное описание">
+
+    <label for="deadline">Дедлайн</label>
+    <input
+      id="deadline"
+      class="task-form__input"
+      formControlName="deadline"
+      type="datetime-local"
+      placeholder="Срок выполнения"
+      [min]="today"
+      [class.task-form__input--invalid]="taskForm.get('deadline')?.invalid && taskForm.get('deadline')?.touched">
+    @if (taskForm.get('deadline')?.errors?.['minDate']) {
+      <p class="task-form__error">Дата не может быть раньше сегодняшнего дня</p>
+    }
+
+    <button
+      class="task-form__button"
+      type="submit"
+      [disabled]="!taskForm.valid">Добавить задачу</button>
+  </form>
+</div>

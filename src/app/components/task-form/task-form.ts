@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { TaskService } from '../../services/task-service';
 import { TaskItem } from '../../interface/task';
 import {
@@ -10,6 +10,7 @@ import {
   ValidationErrors,
   Validators
 } from '@angular/forms';
+import { MatIcon } from '@angular/material/icon';
 
 
 function minDateValidator(control: AbstractControl): ValidationErrors | null {
@@ -24,7 +25,8 @@ function minDateValidator(control: AbstractControl): ValidationErrors | null {
   selector: 'app-task-form',
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIcon,
   ],
   templateUrl: './task-form.html',
   styleUrl: './task-form.scss'
@@ -32,6 +34,8 @@ function minDateValidator(control: AbstractControl): ValidationErrors | null {
 export class TaskForm {
   taskService = inject(TaskService)
   today = new Date().toISOString().slice(0, 16);
+
+  @Output() closeForm = new EventEmitter<void>();
 
   taskForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
