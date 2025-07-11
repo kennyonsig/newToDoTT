@@ -23,6 +23,7 @@ export class Dashboard {
   taskService = inject(TaskService);
   //TODO #1 - сохранние в storage при перемещении.
   //TODO #2 - изменение статуса при перемещении
+  //TODO #3 - исправить баз с колонками прогресс и выполненно
   tasks = this.taskService.tasks;
   progressTasks = this.taskService.progressTasks;
   completedTasks = this.taskService.completedTasks;
