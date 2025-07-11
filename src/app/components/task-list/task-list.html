@@ -5,7 +5,7 @@
   </app-search-input>
   <div class="tasks">
     @for (task of tasks(); track task.id) {
-      <div class="tasks__item">
+      <div class="tasks__item tuiAnimated-container" tuiAnimated>
         <app-task-header
           [task]="task"
           [isEditing]="editingTaskId() === task.id"
@@ -23,7 +23,7 @@
   </div>
 
   @if (isOpenForm || hasNoTasks ) {
-    <div class="tasks__form" tuiAnimated>
+    <div class="tasks__form tuiAnimated-container" tuiAnimated>
       <app-task-form (closeForm)="openForm()"></app-task-form>
     </div>
   }

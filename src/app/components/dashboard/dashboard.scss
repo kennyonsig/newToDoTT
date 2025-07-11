@@ -1,15 +1,20 @@
-.container {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-}
-
 .wrapper {
   display: flex;
   flex-direction: column;
   padding: 25px;
   gap: 25px;
   align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  width: 100%;
+
+  @media (max-width: 1072px) {
+    flex-wrap: wrap;
+  }
 }
 
 h2 {
@@ -34,7 +39,7 @@ a {
 }
 
 .list-container {
-  width: 400px;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
 }

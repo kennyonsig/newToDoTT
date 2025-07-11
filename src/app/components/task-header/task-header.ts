@@ -3,7 +3,8 @@ import { MatCheckbox } from "@angular/material/checkbox";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TaskItem } from '../../interface/task';
 import { MatIcon } from '@angular/material/icon';
-import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
+import { MatTooltip } from '@angular/material/tooltip';
+
 
 @Component({
   selector: 'app-task-header',
@@ -13,7 +14,6 @@ import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
     ReactiveFormsModule,
     FormsModule,
     MatTooltip,
-    MatTooltipModule
   ],
   templateUrl: './task-header.html',
   styleUrl: './task-header.scss'

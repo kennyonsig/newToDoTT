@@ -3,7 +3,7 @@ export interface  TaskItem {
   title: string;
   description?: string;
   inProgress: boolean;
-  isCompleted: boolean;
   createdAt: Date;
   deadLine: Date;
+  isCompleted: boolean;
 }

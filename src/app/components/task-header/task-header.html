@@ -1,4 +1,6 @@
-<div class="task-header">
+<div class="task-header"
+     [class.task__status--completed]="task.isCompleted"
+     [class.task__status--in-progress]="!task.isCompleted">
   <mat-checkbox
     [checked]="task.isCompleted"
     (change)="toggleComplete.emit($event.checked)"
@@ -21,12 +23,7 @@
       (keyup.enter)="save.emit()"
     >
   }
-  <p class="task__status">
-    <span [class.task__status--completed]="task.isCompleted"
-          [class.task__status--in-progress]="!task.isCompleted">
-      {{ task.isCompleted ? 'Завершена' : 'Выполняется' }}
-    </span>
-  </p>
+
   <div class="task-header__actions">
     <button (click)="editClick.emit()" class="task-header__btn task-header__btn--edit">
       <mat-icon>{{ isEditing ? 'save' : 'edit' }}</mat-icon>
