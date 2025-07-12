@@ -44,10 +44,14 @@ export class TaskService {
     this.tasks.update(tasks => [...tasks, task]);
   }
 
+  updateTaskSignal(updater: (tasks: TaskItem[]) => TaskItem[]) {
+    this.tasks.update(updater);
+    this.progressTasks.update(updater);
+    this.completedTasks.update(updater);
+  }
+
   removeTask(id: number) {
-    this.tasks.update(tasks => tasks.filter(task => task.id !== id));
-    this.progressTasks.update(tasks => tasks.filter(task => task.id !== id));
-    this.completedTasks.update(tasks => tasks.filter(task => task.id !== id));
+    this.updateTaskSignal(tasks => tasks.filter(task => task.id !== id));
 
     if (this.editingTaskId() === id) {
       this.editingTaskId.set(null);
@@ -55,7 +59,7 @@ export class TaskService {
   }
 
   updateTask(updateTask: TaskItem) {
-    this.tasks.update(tasks =>
+    this.updateTaskSignal(tasks =>
       tasks.map(task => task.id === updateTask.id ? updateTask : task)
     );
   }
@@ -89,7 +93,7 @@ export class TaskService {
   }
 
   getTaskById(id: number) {
-    return this.allTasks().find(t => t.id === id);
+    return this.allTasks().find(task => task.id === id);
   }
 
   filteredTasks = computed(() => {
