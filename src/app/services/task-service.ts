@@ -17,6 +17,15 @@ export class TaskService {
     ...this.completedTasks(),
   ]);
 
+  filteredTasks = computed(() => {
+    const query = this.searchQuery().toLowerCase();
+    if (!query) return this. allTasks();
+
+    return this. allTasks().filter(task =>
+      task.title.toLowerCase().includes(query));
+  });
+
+
   storageKey = ['tasks', 'progress', 'completed'];
 
 
@@ -95,14 +104,6 @@ export class TaskService {
   getTaskById(id: number) {
     return this.allTasks().find(task => task.id === id);
   }
-
-  filteredTasks = computed(() => {
-    const query = this.searchQuery().toLowerCase();
-    if (!query) return this.tasks();
-
-    return this.tasks().filter(task =>
-      task.title.toLowerCase().includes(query));
-  });
 
   setSearchQuery(query: string) {
     this.searchQuery.set(query);
