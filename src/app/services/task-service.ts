@@ -21,13 +21,11 @@ export class TaskService {
     const query = this.searchQuery().toLowerCase();
     if (!query) return this. allTasks();
 
-    return this. allTasks().filter(task =>
+    return this.allTasks().filter(task =>
       task.title.toLowerCase().includes(query));
   });
 
-
   storageKey = ['tasks', 'progress', 'completed'];
-
 
   constructor() {
     this.loadFromStorage();

@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
     TaskHeader,
     CdkDrag,
     TaskMeta,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
@@ -21,7 +21,6 @@ import { RouterLink } from '@angular/router';
 export class Dashboard {
 
   taskService = inject(TaskService);
-  //TODO #1 - сохранние в storage при перемещении.
   //TODO #2 - изменение статуса при перемещении
   tasks = this.taskService.tasks;
   progressTasks = this.taskService.progressTasks;
@@ -58,6 +57,5 @@ export class Dashboard {
         event.previousIndex,
         event.currentIndex,
       );
-
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit} from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task-service';
 import { MatIconModule } from '@angular/material/icon'
 import { TaskItem } from '../../interface/task';
@@ -33,9 +33,10 @@ export class TaskList implements OnInit {
   editingTaskId = this.taskService.editingTaskId;
   valueTip = 'Добавить задачу'
   isOpenForm = false;
+  hasNoTasks = computed(() => this.taskService.allTasks().length === 0);
 
   ngOnInit() {
-    this.isOpenForm = this.hasNoTasks;
+    this.isOpenForm = this.hasNoTasks();
     this.taskService.setSearchQuery('');
   }
 
@@ -53,11 +54,6 @@ export class TaskList implements OnInit {
 
   saveTask(task: TaskItem) {
     this.taskService.saveTask(task);
-  }
-
-  get hasNoTasks() {
-    const savedTasks = this.taskService.getTasksStorage();
-    return !savedTasks || JSON.parse(savedTasks).length === 0;
   }
 
   openForm() {

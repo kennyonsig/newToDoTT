@@ -11,17 +11,28 @@
   justify-content: center;
   gap: 25px;
   width: 100%;
+  align-items: flex-start;
 
   @media (max-width: 1072px) {
     flex-wrap: wrap;
   }
 }
 
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+p, h2 {
+  font-size: 1.5rem;
+  padding: 10px;
+  border-bottom: 1px solid black;
+  margin-bottom: 5px;
+}
+
 h2 {
-  margin-bottom: 20px;
-  background-color: white;
-  border-radius: 4px;
-  padding: 20px;
+  flex: 1;
 }
 
 a {
@@ -38,24 +49,22 @@ a {
   }
 }
 
-.list-container {
+.tasks-list {
   width: 100%;
   display: inline-block;
   vertical-align: top;
-}
-
-.tasks-list {
-  border: solid 1px #ccc;
-  min-height: 60px;
   background: white;
   border-radius: 4px;
   overflow: hidden;
-  display: block;
+  min-height: 60px;
 }
 
 .tasks-list-box {
   border-bottom: solid 1px #ccc;
-  cursor: move;
+
+  & > * {
+    cursor: move;
+  }
 }
 
 .cdk-drag-preview {
