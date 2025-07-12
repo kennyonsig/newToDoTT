@@ -8,10 +8,17 @@ export class TaskService {
   tasks = signal<TaskItem[]>([]);
   progressTasks = signal<TaskItem[]>([]);
   completedTasks = signal<TaskItem[]>([]);
-
-  storageKey = ['tasks', 'progress', 'completed'];
   editingTaskId = signal<number | null>(null);
   searchQuery = signal('');
+
+  allTasks = computed(() => [
+    ...this.tasks(),
+    ...this.progressTasks(),
+    ...this.completedTasks(),
+  ]);
+
+  storageKey = ['tasks', 'progress', 'completed'];
+
 
   constructor() {
     this.loadFromStorage();
@@ -41,6 +48,7 @@ export class TaskService {
     this.tasks.update(tasks => tasks.filter(task => task.id !== id));
     this.progressTasks.update(tasks => tasks.filter(task => task.id !== id));
     this.completedTasks.update(tasks => tasks.filter(task => task.id !== id));
+
     if (this.editingTaskId() === id) {
       this.editingTaskId.set(null);
     }
@@ -81,7 +89,7 @@ export class TaskService {
   }
 
   getTaskById(id: number) {
-    return this.tasks().find(t => t.id === id);
+    return this.allTasks().find(t => t.id === id);
   }
 
   filteredTasks = computed(() => {
