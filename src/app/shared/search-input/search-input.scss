@@ -1,14 +1,48 @@
+
+.wrapper {
+  padding: 0 20px;
+  background-color: #272727;
+}
+
+.container {
+  display: flex;
+  padding: 12px 0;
+  gap: 16px;
+  height: 56px;
+  align-items: center;
+}
+
 input {
+  padding: 10px 10px 10px 40px;
+  border-radius: 8px;
   width: 100%;
-  padding: 10px 20px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  font-size: 15px;
-  transition: border-color 0.3s;
+  background-color: #424242;
+  color: white;
+  border: 1px solid rgb(77, 76, 76);
+  outline: none;
+
+  &::placeholder {
+    color: rgb(107, 105, 105);
+  }
 
   &:focus {
-    outline: none;
-    box-shadow: 0 0 4px 1px rgb(4, 221, 245);
+    border-color: rgb(187, 187, 186);
   }
 }
 
+.input-wrapper {
+  position: relative;
+}
+
+span {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  color: #999;
+}
+
+p {
+  color: white;
+}

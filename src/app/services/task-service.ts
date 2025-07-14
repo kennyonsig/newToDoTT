@@ -71,10 +71,6 @@ export class TaskService {
     );
   }
 
-  getTasksStorage() {
-    return localStorage.getItem(this.storageKey[0])
-  }
-
   saveTask(task: TaskItem): void {
     this.updateTask(task);
     this.editingTaskId.set(null);

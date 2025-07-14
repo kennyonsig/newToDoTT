@@ -1,5 +1,13 @@
-<input
-  [(ngModel)]="searchValue"
-  (ngModelChange)="onInputChange()"
-  type="text"
-  placeholder="Поиск задач">
+<div class="wrapper">
+  <div class="container">
+    <p>{{ pageTitle }}</p>
+    <div class="input-wrapper">
+      <span><mat-icon>search</mat-icon></span>
+      <input
+        [(ngModel)]="searchValue"
+        (ngModelChange)="onInputChange()"
+        type="text"
+        placeholder="Поиск задач">
+    </div>
+  </div>
+</div>

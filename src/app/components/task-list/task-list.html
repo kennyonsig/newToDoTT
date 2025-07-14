@@ -1,8 +1,9 @@
-<div class="container">
+<app-search-input class="tasks-search"
+                  (searchTask)="findTask($event)"
+                  [pageTitle]="pageTitle">
+</app-search-input>
 
-  <app-search-input class="tasks-search"
-        (searchTask)="findTask($event)">
-  </app-search-input>
+<div class="container">
   <div class="tasks">
     @for (task of tasks(); track task.id) {
       <div class="tasks__item tuiAnimated-container" tuiAnimated>

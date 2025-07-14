@@ -32,6 +32,7 @@ export class TaskList implements OnInit {
   tasks = this.taskService.filteredTasks;
   editingTaskId = this.taskService.editingTaskId;
   valueTip = 'Добавить задачу'
+  pageTitle = 'Все задачи'
   isOpenForm = false;
   hasNoTasks = computed(() => this.taskService.allTasks().length === 0);
 
