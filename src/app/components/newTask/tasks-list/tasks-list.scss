@@ -1,0 +1,46 @@
+.list {
+  padding: 20px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  &__info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  &__info-section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+    &--left {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__main {
+    padding-left: 24px;
+  }
+
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:hover {
+    color: #099bf8;
+  }
+}
+
+mat-icon {
+  transform: scale(0.8);
+}
