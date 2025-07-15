@@ -1,6 +1,7 @@
 <app-search-input class="tasks-search"
                   (searchTask)="findTask($event)"
                   [pageTitle]="pageTitle">
+  <a routerLink="/dashboard">Доска задач</a>
 </app-search-input>
 
 <div class="container">
@@ -36,7 +37,5 @@
       </button>
     </div>
   }
-  <div class="link-wrapper">
-    <a routerLink="/dashboard">Доска задач</a>
-  </div>
+
 </div>
