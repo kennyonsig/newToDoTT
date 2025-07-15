@@ -64,51 +64,19 @@
     overflow: hidden;
     box-shadow: 0 3px 6px rgba(0,0,0,0.1);
   }
-
-  &__actions {
-    gap: 10px;
-    margin-top: 10px;
-    padding-bottom: 20px;
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  &__toggle-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: #42a5f5;
-    color: white;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    transition: all 0.3s;
-
-    &:hover {
-      background: #1976d2;
-    }
-  }
 }
 
-a {
+a, .tasks__toggle-btn {
+  display: inline-block;
   background-color: white;
-  padding: 10px;
-  border-radius: 4px;
-  color: black;
-  transition: all .2s ease;
-  text-align: center;
-  width: 200px;
-
+  border-radius: 8px;
+  transition: background-color .2s ease;
+  font-size: .9em;
+  padding: 8px 12px;
+  font-family: inherit;
 
   &:hover {
     background-color: #b9b3b3;
   }
 }
-
 

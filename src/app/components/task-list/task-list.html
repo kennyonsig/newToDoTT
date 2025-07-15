@@ -1,7 +1,12 @@
 <app-search-input class="tasks-search"
                   (searchTask)="findTask($event)"
                   [pageTitle]="pageTitle">
-  <a routerLink="/dashboard">Доска задач</a>
+  <a routerLink="/dashboard">Dashboard</a>
+  @if (!hasNoTasks() && !isOpenForm) {
+      <button [matTooltip]="valueTip" class="tasks__toggle-btn" matTooltipClass="custom-tooltip" (click)="openForm()">
+        Add task
+      </button>
+  }
 </app-search-input>
 
 <div class="container">
@@ -30,12 +35,5 @@
     </div>
   }
 
-  @if (!hasNoTasks() && !isOpenForm) {
-    <div class="tasks__actions">
-      <button [matTooltip]="valueTip" class="tasks__toggle-btn" matTooltipClass="custom-tooltip" (click)="openForm()">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-  }
 
 </div>
