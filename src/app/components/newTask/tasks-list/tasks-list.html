@@ -10,10 +10,12 @@
           </svg>
         </button>
         <button class="list__toggle" (click)="toggleList()">
-          <mat-icon class="list__icon">{{ isOpen ? 'expand_less' : 'expand_more' }}</mat-icon>
+          <mat-icon class="list__icon">{{ isCollapsed ? 'expand_less' : 'expand_more' }}</mat-icon>
         </button>
-        <p class="list__title">{{ taskListTitle }}</p>
-        <p class="list__counter">{{ taskCount }}</p>
+        <div class="list__title-wrapper">
+          <p class="list__title-text">{{ taskListTitle }}</p>
+          <p class="list__counter">{{ taskCount }}</p>
+        </div>
       </div>
 
       <div class="list__actions">
@@ -25,15 +27,17 @@
     </div>
 
     <div class="list__move">
-      <button class="list__move-button">Up</button>
-      <button class="list__move-button">Down</button>
+      <button class="list__move-button"><mat-icon>keyboard_arrow_up</mat-icon></button>
+      <button class="list__move-button"><mat-icon>keyboard_arrow_down</mat-icon></button>
     </div>
   </div>
 
   <div class="list__main">
-    @for (task of tasks; track task) {
+    @if (isCollapsed) {
+      @for (task of tasks; track task) {
 
+      }
+      <button class="list__create-button">+ создать задачу</button>
     }
-    <button class="list__create-button">+ create task</button>
   </div>
 </div>

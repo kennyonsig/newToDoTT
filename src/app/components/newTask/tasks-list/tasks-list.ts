@@ -14,11 +14,11 @@ export class TasksList {
   @Input() taskListTitle = '';
   @Input() taskCount = 0;
   @Input() tasks = [];
+  @Input() isCollapsed = false;
 
-  isOpen  = false;
 
   toggleList() {
-    this.isOpen = !this.isOpen;
+    this.isCollapsed = !this.isCollapsed;
   }
 
 }

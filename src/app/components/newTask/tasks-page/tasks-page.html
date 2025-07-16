@@ -1,8 +1,15 @@
 <app-search-input [pageTitle]="pageTitle"></app-search-input>
 
 <div>
-  <button>Add list</button>
+  <button>Добавить список</button>
 </div>
 
-<app-tasks-list [taskListTitle]="taskListIncoming"></app-tasks-list>
-<app-tasks-list [taskListTitle]="taskListDone"></app-tasks-list>
+<div class="task-lists__container">
+
+  @for (taskList of taskLists; track taskList.id) {
+    <app-tasks-list [taskListTitle]="taskList.title"
+                    [isCollapsed]="taskList.collapsed"
+    ></app-tasks-list>
+  }
+
+</div>
