@@ -53,4 +53,7 @@ export class TasksPage {
     this.isAddList = false;
   }
 
+  findTask(taskQuery: string) {
+    console.log(taskQuery)
+  }
 }

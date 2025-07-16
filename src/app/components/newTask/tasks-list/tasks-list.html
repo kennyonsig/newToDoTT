@@ -14,7 +14,7 @@
         </button>
         <div class="list__title-wrapper">
           <p class="list__title-text">{{ taskList.title }}</p>
-          <p class="list__counter">{{ taskCount }}</p>
+          <p class="list__counter">{{ taskList.tasks.length }}</p>
         </div>
       </div>
 
@@ -35,17 +35,21 @@
   <div class="list__main">
     @if (isExpanded) {
       @for (task of taskList.tasks; track task) {
-        <div>{{ task.title }}</div>
+        <app-task-on-page [task]="task"></app-task-on-page>
       }
 
       @if (canCreateTask) {
 
         @if (createdTask) {
-          <input type="text" [(ngModel)]="taskTitle" (keyup.enter)="addTask()">
+          <input class="task-title__input"
+                 type="text"
+                 [(ngModel)]="taskTitle"
+                 (keyup.enter)="addTask()"
+                 placeholder="Введите название задачи"
+          >
         } @else {
           <button class="list__create-button" (click)="atCreate()">+ создать задачу</button>
         }
-
       }
     }
   </div>

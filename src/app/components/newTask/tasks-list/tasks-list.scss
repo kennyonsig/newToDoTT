@@ -27,7 +27,7 @@
   }
 
   &__main {
-    padding-left: 24px;
+    padding-left: 74px;
   }
 
   &__move {
@@ -56,6 +56,19 @@
     border-radius: 5px;
     font-size: 12px;
     font-weight: 600;
+  }
+}
+
+.task-title__input {
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  border-bottom: 1px solid #dedbdb;
+  font-size: 14px;
+
+  &::placeholder {
+    font-weight: 600;
+    opacity: 0.7;
   }
 }
 

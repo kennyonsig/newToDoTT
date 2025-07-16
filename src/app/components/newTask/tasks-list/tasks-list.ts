@@ -3,12 +3,14 @@ import { MatIcon } from '@angular/material/icon';
 import { TaskList } from '../interface/task';
 import { FormsModule } from '@angular/forms';
 import { TasksListService } from '../services/tasks-list-service';
+import { TaskOnPage } from '../task-on-page/task-on-page';
 
 @Component({
   selector: 'app-tasks-list',
   imports: [
     MatIcon,
-    FormsModule
+    FormsModule,
+    TaskOnPage
   ],
   templateUrl: './tasks-list.html',
   styleUrl: './tasks-list.scss'
@@ -19,9 +21,8 @@ export class TasksList {
   @Input() canCreateTask!: boolean;
   taskListService = inject(TasksListService);
 
-  taskCount = 0;
-  taskTitle = ''
-  createdTask = false
+  taskTitle = '';
+  createdTask = false;
   isExpanded = true;
 
 

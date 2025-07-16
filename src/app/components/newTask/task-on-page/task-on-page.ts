@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Task } from '../interface/task'
 
 @Component({
   selector: 'app-task-on-page',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './task-on-page.scss'
 })
 export class TaskOnPage {
+
+  @Input() task!: Task;
+
+
 
 }
