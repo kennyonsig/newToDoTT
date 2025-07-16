@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { SearchInput } from '../../../shared/search-input/search-input';
-import { Task, TaskList } from '../interface/task';
 import { TasksList } from '../tasks-list/tasks-list';
+import { TasksListService } from '../services/tasks-list-service';
+import { FormsModule } from '@angular/forms';
+import { Task } from '../interface/task';
 
 @Component({
   selector: 'app-tasks-page',
   imports: [
     TasksList,
     SearchInput,
-    TasksList
+    TasksList,
+    FormsModule
   ],
   templateUrl: './tasks-page.html',
   styleUrl: './tasks-page.scss'
@@ -18,31 +21,36 @@ export class TasksPage {
 
   pageTitle = 'My Tasks';
 
+  isAddList= false;
 
-  taskLists: TaskList[] = [
-    {
-      id: 1,
-      title: 'Task incoming',
+  tasksListService = inject(TasksListService)
+
+  taskLists = this.tasksListService.taskLists
+
+  newTitle = ''
+
+  addList() {
+    this.isAddList = !this.isAddList;
+  }
+
+  addNewList() {
+
+    const title = this.newTitle.trim();
+    if (!title) return;
+
+    const lists = this.taskLists();
+
+    const newList = {
+      id:  Math.max(...lists.map(l => l.id), 0) + 1,
+      title: title,
       tasks: [],
-      position: 0,
-      collapsed: false,
-      isImmutable: true
-    },
-    {
-      id: 2,
-      title: 'Done',
-      tasks: [],
-      position: 1,
-      collapsed: false,
-      isImmutable: true
-    },
-    {
-      id: 3,
-      title: 'тест',
-      tasks: [],
-      position: 2,
+      position: Math.max(...lists.map(l => l.position), 0) + 1,
       collapsed: false
-    },
-  ];
+    }
+
+    this.tasksListService.addList(newList)
+    this.newTitle = '';
+    this.isAddList = false;
+  }
 
 }

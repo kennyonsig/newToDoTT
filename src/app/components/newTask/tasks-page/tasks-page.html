@@ -1,12 +1,23 @@
 <app-search-input [pageTitle]="pageTitle"></app-search-input>
 
 <div>
-  <button>Добавить список</button>
+  <button (click)="addList()">Добавить список</button>
+
+  @if (isAddList) {
+    <input type="text"
+           placeholder="Название списка"
+           (keyup.enter)="addNewList()"
+           [(ngModel)]="newTitle"
+    >
+  }
+
 </div>
 
 <div class="task-lists__container">
 
-  @for (taskList of taskLists; track taskList.id) {
+
+
+  @for (taskList of taskLists(); track taskList.id) {
     <app-tasks-list [taskListTitle]="taskList.title"
                     [isCollapsed]="taskList.collapsed"
     ></app-tasks-list>
