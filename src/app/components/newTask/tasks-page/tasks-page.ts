@@ -4,7 +4,6 @@ import { SearchInput } from '../../../shared/search-input/search-input';
 import { TasksList } from '../tasks-list/tasks-list';
 import { TasksListService } from '../services/tasks-list-service';
 import { FormsModule } from '@angular/forms';
-import { Task } from '../interface/task';
 
 @Component({
   selector: 'app-tasks-page',
@@ -41,11 +40,12 @@ export class TasksPage {
     const lists = this.taskLists();
 
     const newList = {
-      id:  Math.max(...lists.map(l => l.id), 0) + 1,
+      id: Math.max(...lists.map(l => l.id), 0) + 1,
       title: title,
       tasks: [],
       position: Math.max(...lists.map(l => l.position), 0) + 1,
-      collapsed: false
+      expanded: true,
+      canCreateTask:true
     }
 
     this.tasksListService.addList(newList)

@@ -10,10 +10,10 @@
           </svg>
         </button>
         <button class="list__toggle" (click)="toggleList()">
-          <mat-icon class="list__icon">{{ isCollapsed ? 'expand_less' : 'expand_more' }}</mat-icon>
+          <mat-icon class="list__icon">{{ isExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
         </button>
         <div class="list__title-wrapper">
-          <p class="list__title-text">{{ taskListTitle }}</p>
+          <p class="list__title-text">{{ taskList.title }}</p>
           <p class="list__counter">{{ taskCount }}</p>
         </div>
       </div>
@@ -33,11 +33,20 @@
   </div>
 
   <div class="list__main">
-    @if (isCollapsed) {
-      @for (task of tasks; track task) {
+    @if (isExpanded) {
+      @for (task of taskList.tasks; track task) {
+        <div>{{ task.title }}</div>
+      }
+
+      @if (canCreateTask) {
+
+        @if (createdTask) {
+          <input type="text" [(ngModel)]="taskTitle" (keyup.enter)="addTask()">
+        } @else {
+          <button class="list__create-button" (click)="atCreate()">+ создать задачу</button>
+        }
 
       }
-      <button class="list__create-button">+ создать задачу</button>
     }
   </div>
 </div>

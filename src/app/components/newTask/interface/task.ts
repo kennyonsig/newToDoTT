@@ -4,7 +4,7 @@ export interface Task {
   assignees: string[];
   deadline: Date | null;
   stickers: Sticker[];
-  isCompleted?: boolean;
+  isCompleted: boolean;
 }
 
 interface Sticker {
@@ -20,6 +20,7 @@ export interface TaskList {
   tasks: Task[];
   isImmutable?: true;
   position: number;
-  collapsed: boolean;
+  expanded: boolean;
+  canCreateTask: boolean;
 }
 
