@@ -1,5 +1,5 @@
 export interface Task {
-  id: number;
+  id: string;
   title: string;
   assignees: string[];
   deadline: Date | null;
@@ -8,14 +8,14 @@ export interface Task {
 }
 
 interface Sticker {
-  id: number;
+  id: string;
   name: string;
   color?: string;
 }
 
 
 export interface TaskList {
-  id: number;
+  id: string;
   title: string;
   tasks: Task[];
   isImmutable?: true;

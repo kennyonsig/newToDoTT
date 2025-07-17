@@ -4,13 +4,16 @@ import { TaskList } from '../interface/task';
 import { FormsModule } from '@angular/forms';
 import { TasksListService } from '../services/tasks-list-service';
 import { TaskOnPage } from '../task-on-page/task-on-page';
+import { NgClickOutsideDirective } from 'ng-click-outside2';
+
 
 @Component({
   selector: 'app-tasks-list',
   imports: [
     MatIcon,
     FormsModule,
-    TaskOnPage
+    TaskOnPage,
+    NgClickOutsideDirective,
   ],
   templateUrl: './tasks-list.html',
   styleUrl: './tasks-list.scss'
@@ -19,11 +22,12 @@ export class TasksList {
 
   @Input() taskList!: TaskList;
   @Input() canCreateTask!: boolean;
-  taskListService = inject(TasksListService);
-
+  tasksListService = inject(TasksListService);
+  isListMenuOpen = false;
   taskTitle = '';
   createdTask = false;
   isExpanded = true;
+  startUpdate = false;
 
 
   toggleList() {
@@ -39,7 +43,7 @@ export class TasksList {
     if (!this.taskTitle.trim()) return
 
     const newTask = {
-      id: Math.max(...this.taskList.tasks.map(task => task.id), 0) + 1,
+      id: crypto.randomUUID(),
       title: this.taskTitle,
       assignees: [],
       deadline: null,
@@ -49,6 +53,29 @@ export class TasksList {
 
     this.taskTitle = '';
     this.createdTask = false;
-    this.taskListService.addTaskToList(newTask, this.taskList.id)
+    this.tasksListService.addTaskToList(newTask, this.taskList.id)
+  }
+
+  removeList(listId: string) {
+    this.tasksListService.removeList(listId);
+    this.isListMenuOpen = false;
+  }
+
+  openListMenu() {
+    this.isListMenuOpen = !this.isListMenuOpen;
+  }
+
+  startUpdateTaskTitle() {
+    this.startUpdate = !this.startUpdate;
+    this.isListMenuOpen = false;
+  }
+
+  updateTaskTitle() {
+    console.log('Updated title:', this.taskList.title);
+    this.startUpdate = false;
+  }
+
+  onClickedOutside() {
+    this.isListMenuOpen = false;
   }
 }

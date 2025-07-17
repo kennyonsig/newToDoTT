@@ -2,11 +2,11 @@
                   (searchTask)="findTask($event)"></app-search-input>
 
 <div>
-  <button class="add-list-btn" (click)="addList()">Добавить список</button>
+  <button class="add-list-btn" (click)="toggleAddList()">Добавить список</button>
 </div>
 
 @if (isAddList) {
-  <div>
+  <div (clickOutside)="onClickedOutside()">
     <input type="text"
            class="add-list-input"
            placeholder="Название списка"

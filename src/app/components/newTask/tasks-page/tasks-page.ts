@@ -4,6 +4,8 @@ import { SearchInput } from '../../../shared/search-input/search-input';
 import { TasksList } from '../tasks-list/tasks-list';
 import { TasksListService } from '../services/tasks-list-service';
 import { FormsModule } from '@angular/forms';
+import { NgClickOutsideDirective } from 'ng-click-outside2';
+
 
 @Component({
   selector: 'app-tasks-page',
@@ -11,36 +13,32 @@ import { FormsModule } from '@angular/forms';
     TasksList,
     SearchInput,
     TasksList,
-    FormsModule
+    FormsModule,
+    NgClickOutsideDirective,
   ],
   templateUrl: './tasks-page.html',
   styleUrl: './tasks-page.scss'
 })
 export class TasksPage {
-
   pageTitle = 'My Tasks';
-
   isAddList= false;
+  tasksListService = inject(TasksListService);
+  newTitle = '';
 
-  tasksListService = inject(TasksListService)
+  taskLists = this.tasksListService.taskLists;
 
-  taskLists = this.tasksListService.taskLists
-
-  newTitle = ''
-
-  addList() {
+  toggleAddList() {
     this.isAddList = !this.isAddList;
   }
 
   addNewList() {
-
     const title = this.newTitle.trim();
     if (!title) return;
 
     const lists = this.taskLists();
 
     const newList = {
-      id: Math.max(...lists.map(l => l.id), 0) + 1,
+      id: crypto.randomUUID(),
       title: title,
       tasks: [],
       position: Math.max(...lists.map(l => l.position), 0) + 1,
@@ -55,5 +53,13 @@ export class TasksPage {
 
   findTask(taskQuery: string) {
     console.log(taskQuery)
+  }
+
+  onClickedOutside() {
+    const title = this.newTitle.trim();
+    if (title) {
+      this.addNewList();
+    }
+    this.isAddList = false;
   }
 }

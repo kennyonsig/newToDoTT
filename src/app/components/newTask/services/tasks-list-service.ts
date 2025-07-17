@@ -1,7 +1,5 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { TaskList, Task } from '../interface/task';
-import { TaskService } from './task-service';
-
 
 
 @Injectable({
@@ -9,11 +7,10 @@ import { TaskService } from './task-service';
 })
 export class TasksListService {
 
-  taskService = inject(TaskService);
 
   taskListData: TaskList[] = [
     {
-      id: 1,
+      id: '1',
       title: 'Done',
       tasks: [],
       position: 0,
@@ -22,7 +19,7 @@ export class TasksListService {
       canCreateTask: false
     },
     {
-      id: 2,
+      id: '2',
       title: 'Task incoming',
       tasks: [],
       position: 1,
@@ -38,7 +35,11 @@ export class TasksListService {
     this.taskLists.update(lists => [...lists, newList]);
   }
 
-  addTaskToList(task: Task, listId: number) {
+  removeList(listId: string) {
+    this.taskLists.update(lists => lists.filter(item => item.id !== listId));
+  }
+
+  addTaskToList(task: Task, listId: string) {
     this.taskLists.update(lists =>
       lists.map(list =>
         list.id === listId
