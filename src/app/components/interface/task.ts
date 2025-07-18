@@ -5,6 +5,10 @@ export interface Task {
   deadline: Date | null;
   stickers: Sticker[];
   isCompleted: boolean;
+  isFavorite: boolean;
+  author: string;
+  createdAt: Date;
+  location: string;
 }
 
 interface Sticker {

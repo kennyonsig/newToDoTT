@@ -34,6 +34,7 @@
                    [(ngModel)]="taskList.title"
                    (keyup.enter)="updateTaskTitle()"
                    (clickOutside)="onClickedOutside()"
+                   appAutoFocus
             >
           } @else {
             <p class="list__title-text">{{ taskList.title }}</p>
@@ -46,7 +47,7 @@
         <button class="list__action"><mat-icon class="list__icon">settings</mat-icon></button>
         <button class="list__action"><mat-icon class="list__icon">filter_list</mat-icon></button>
         <button class="list__action"><mat-icon class="list__icon">import_export</mat-icon></button>
-        <button class="list__action"><mat-icon class="list__icon">add_box</mat-icon></button>
+        <button class="list__action" (click)="atCreate()"><mat-icon class="list__icon">add_box</mat-icon></button>
       </div>
     </div>
 
@@ -65,15 +66,20 @@
       @if (canCreateTask) {
 
         @if (createdTask) {
-          <input class="task-title__input"
-                 type="text"
-                 [(ngModel)]="taskTitle"
-                 (keyup.enter)="addTask()"
-                 placeholder="Введите название задачи"
-                 (clickOutside)="onClickedOutside()"
-          >
+          <div class="task-title__container">
+            <input class="task-title__input"
+                   type="text"
+                   [(ngModel)]="taskTitle"
+                   (keyup.enter)="addTask()"
+                   placeholder="Введите название задачи"
+                   (clickOutside)="onClickedOutside()"
+                   appAutoFocus
+            >
+          </div>
         } @else {
-          <button class="list__create-button" (click)="atCreate()">+ создать задачу</button>
+          <div class="task-title__container">
+            <button class="list__create-button" (click)="atCreate()">+ создать задачу</button>
+          </div>
         }
       }
     }

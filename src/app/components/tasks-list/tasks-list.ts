@@ -1,10 +1,11 @@
-import { Component, inject, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { TaskList } from '../interface/task';
 import { FormsModule } from '@angular/forms';
 import { TasksListService } from '../services/tasks-list-service';
 import { TaskOnPage } from '../task-on-page/task-on-page';
 import { NgClickOutsideDirective } from 'ng-click-outside2';
+import { AutoFocus } from '../../directives/auto-focus';
 
 
 @Component({
@@ -14,11 +15,13 @@ import { NgClickOutsideDirective } from 'ng-click-outside2';
     FormsModule,
     TaskOnPage,
     NgClickOutsideDirective,
+    AutoFocus,
   ],
   templateUrl: './tasks-list.html',
   styleUrl: './tasks-list.scss'
 })
 export class TasksList {
+
   @Input() taskList!: TaskList;
   @Input() canCreateTask!: boolean;
   tasksListService = inject(TasksListService);
@@ -46,7 +49,11 @@ export class TasksList {
       assignees: [],
       deadline: null,
       stickers: [],
-      isCompleted: false
+      isCompleted: false,
+      isFavorite: false,
+      author: 'user',
+      createdAt: new Date(),
+      location: 'Задача без доски',
     }
 
     this.taskTitle = '';
@@ -66,7 +73,7 @@ export class TasksList {
     this.startUpdate = !this.startUpdate;
     this.isListMenuOpen = false;
   }
-
+  // TODO updateTaskTitle
   updateTaskTitle() {
     console.log('Updated title:', this.taskList.title);
     this.startUpdate = false;

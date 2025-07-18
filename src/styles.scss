@@ -10,6 +10,7 @@
 
 html, body {
   height: 100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 
@@ -21,10 +22,14 @@ html, body {
   user-select: none;
 }
 
+input {
+  outline: none;
+}
 
 button {
   cursor: pointer;
   border: none ;
+  background-color: transparent;
 }
 
 a {

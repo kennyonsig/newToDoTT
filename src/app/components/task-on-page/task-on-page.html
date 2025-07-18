@@ -1,3 +1,25 @@
-<div>
-  {{ task.title }}
+<div class="task-item">
+  <button class="task-item__complete" (click)="toggleCompleteTask(task.id)">
+    <mat-icon class="task-item__favorite-icon">
+      {{ task.isCompleted ? 'done' : 'crop_square' }}
+    </mat-icon>
+  </button>
+  <p class="task-item__title">{{ task.title }}</p>
+
+  <button
+    class="task-item__favorite"
+    (click)="toggleToFavoriteTask(task.id)"
+  >
+    <mat-icon class="task-item__favorite-icon">
+      {{ task.isFavorite ? 'star' : 'star_border' }}
+    </mat-icon>
+  </button>
+
+  <p class="task-item__assignees">{{ task.assignees }}</p>
+  <p class="task-item__author">{{ task.author }}</p>
+  <p class="task-item__location">{{ task.location }}</p>
+  <p class="task-item__created-at">{{ task.createdAt | date }}</p>
+  <p class="task-item__deadline">{{ task.deadline | date }}</p>
+  <p class="task-item__stickers">{{ task.stickers }}</p>
 </div>
+

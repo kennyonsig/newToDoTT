@@ -5,6 +5,7 @@ import { TasksList } from '../tasks-list/tasks-list';
 import { TasksListService } from '../services/tasks-list-service';
 import { FormsModule } from '@angular/forms';
 import { NgClickOutsideDirective } from 'ng-click-outside2';
+import { AutoFocus } from '../../directives/auto-focus';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { NgClickOutsideDirective } from 'ng-click-outside2';
     TasksList,
     FormsModule,
     NgClickOutsideDirective,
+    AutoFocus,
   ],
   templateUrl: './tasks-page.html',
   styleUrl: './tasks-page.scss'
@@ -51,6 +53,7 @@ export class TasksPage {
     this.isAddList = false;
   }
 
+  // TODO findTask
   findTask(taskQuery: string) {
     console.log(taskQuery)
   }

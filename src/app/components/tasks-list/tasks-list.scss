@@ -125,6 +125,21 @@
   visibility: visible;
 }
 
+.task-title__container {
+  padding-top: 10px;
+  padding-left: 40px;
+}
+
+.task-title__input {
+  width: 100%;
+  border: none;
+  font-size: 16px;
+
+  &:focus {
+    border-bottom: 1px solid #dedbdb;
+  }
+}
+
 
 button {
   background-color: transparent;

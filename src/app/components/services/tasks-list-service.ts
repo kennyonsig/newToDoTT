@@ -30,7 +30,18 @@ export class TasksListService {
     {
       id: '3',
       title: 'Тест',
-      tasks: [],
+      tasks: [ {
+        id: '22',
+        title: 'тест задча',
+        assignees: ['исполнтетль'],
+        deadline: new Date(),
+        stickers: [],
+        isCompleted: false,
+        isFavorite: false,
+        author: 'user',
+        createdAt: new Date(),
+        location: 'задача без доски'
+      } ],
       position: 1,
       expanded: true,
       canCreateTask: true
