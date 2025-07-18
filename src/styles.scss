@@ -10,9 +10,11 @@
 
 html, body {
   height: 100%;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+body {
+  background-color: #0c465b;
+}
 
 .custom-tooltip {
   font-size: 12px;
@@ -22,11 +24,12 @@ html, body {
   user-select: none;
 }
 
+
 button {
   cursor: pointer;
-  border: none;
+  border: none ;
 }
 
-input {
-  outline: none;
+a {
+  color: black;
 }
