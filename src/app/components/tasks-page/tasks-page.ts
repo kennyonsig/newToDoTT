@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 
-import { SearchInput } from '../../../shared/search-input/search-input';
+import { SearchInput } from '../../shared/search-input/search-input';
 import { TasksList } from '../tasks-list/tasks-list';
 import { TasksListService } from '../services/tasks-list-service';
 import { FormsModule } from '@angular/forms';
@@ -56,10 +56,7 @@ export class TasksPage {
   }
 
   onClickedOutside() {
-    const title = this.newTitle.trim();
-    if (title) {
-      this.addNewList();
-    }
+    this.addNewList();
     this.isAddList = false;
   }
 }

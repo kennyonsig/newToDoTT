@@ -13,9 +13,13 @@
           </button>
 
           @if (isListMenuOpen) {
-            <div class="list__menu" (clickOutside)="onClickedOutside()">
-              <button (click)="startUpdateTaskTitle()">Переименовать список</button>
-              <button (click)="removeList(taskList.id)">Удалить</button>
+            <div class="list-menu" (clickOutside)="onClickedOutside()">
+              <button class="list-menu__item" (click)="startUpdateTaskTitle()">
+                Переименовать список
+              </button>
+              <button class="list-menu__item list-menu__item--danger" (click)="removeList(taskList.id)">
+               Удалить список
+              </button>
             </div>
           }
         }
@@ -25,7 +29,12 @@
         </button>
         <div class="list__title-wrapper">
           @if (startUpdate) {
-            <input class="list__title-input" type="text" [(ngModel)]="taskList.title"  (keyup.enter)="updateTaskTitle()">
+            <input class="list__title-input"
+                   type="text"
+                   [(ngModel)]="taskList.title"
+                   (keyup.enter)="updateTaskTitle()"
+                   (clickOutside)="onClickedOutside()"
+            >
           } @else {
             <p class="list__title-text">{{ taskList.title }}</p>
             <p class="list__counter">{{ taskList.tasks.length }}</p>
@@ -61,6 +70,7 @@
                  [(ngModel)]="taskTitle"
                  (keyup.enter)="addTask()"
                  placeholder="Введите название задачи"
+                 (clickOutside)="onClickedOutside()"
           >
         } @else {
           <button class="list__create-button" (click)="atCreate()">+ создать задачу</button>

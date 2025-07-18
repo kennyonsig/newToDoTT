@@ -6,12 +6,13 @@
 </div>
 
 @if (isAddList) {
-  <div (clickOutside)="onClickedOutside()">
+  <div >
     <input type="text"
            class="add-list-input"
            placeholder="Название списка"
            (keyup.enter)="addNewList()"
            [(ngModel)]="newTitle"
+           (clickOutside)="onClickedOutside()"
     >
   </div>
 }

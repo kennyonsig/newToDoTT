@@ -27,6 +27,14 @@ export class TasksListService {
       isImmutable: true,
       canCreateTask: true
     },
+    {
+      id: '3',
+      title: 'Тест',
+      tasks: [],
+      position: 1,
+      expanded: true,
+      canCreateTask: true
+    },
   ];
 
   taskLists = signal<TaskList[]>(this.taskListData)

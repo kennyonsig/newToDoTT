@@ -19,7 +19,6 @@ import { NgClickOutsideDirective } from 'ng-click-outside2';
   styleUrl: './tasks-list.scss'
 })
 export class TasksList {
-
   @Input() taskList!: TaskList;
   @Input() canCreateTask!: boolean;
   tasksListService = inject(TasksListService);
@@ -28,7 +27,6 @@ export class TasksList {
   createdTask = false;
   isExpanded = true;
   startUpdate = false;
-
 
   toggleList() {
     this.isExpanded = !this.isExpanded;
@@ -52,7 +50,6 @@ export class TasksList {
     }
 
     this.taskTitle = '';
-    this.createdTask = false;
     this.tasksListService.addTaskToList(newTask, this.taskList.id)
   }
 
@@ -77,5 +74,14 @@ export class TasksList {
 
   onClickedOutside() {
     this.isListMenuOpen = false;
+
+    if (this.startUpdate) {
+      this.updateTaskTitle();
+    }
+
+    if (this.createdTask) {
+      this.addTask();
+      this.createdTask = false;
+    }
   }
 }
