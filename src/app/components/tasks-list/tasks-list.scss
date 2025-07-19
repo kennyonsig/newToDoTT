@@ -64,7 +64,7 @@
 .list-menu {
   position: absolute;
   top: 32px;
-  right: 0;
+  right: 40px;
   min-width: 200px;
   background: #ffffff;
   border-radius: 8px;
@@ -111,18 +111,16 @@
   }
 }
 
-.list__button--icon {
+.list__button--icon > mat-icon {
   opacity: 0;
-  visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease;
   border: 1px solid #6a6767;
   padding: 2px;
   border-radius: 5px;
 }
 
-.list__header:hover .list__button--icon {
+.list__header:hover .list__button--icon> mat-icon  {
   opacity: 1;
-  visibility: visible;
 }
 
 .task-title__container {
@@ -140,9 +138,7 @@
   }
 }
 
-
 button {
-  background-color: transparent;
   color: #8a8a8a;
 
   &:hover {
@@ -155,5 +151,5 @@ mat-icon {
 }
 
 .immutable-class {
-  padding-left: 25px;
+  padding-left: 45px;
 }

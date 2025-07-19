@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { TaskList, Task } from '../interface/task';
+import { TaskList, Task } from '../components/interface/task';
 
 
 @Injectable({
@@ -50,15 +50,66 @@ export class TasksListService {
 
   taskLists = signal<TaskList[]>(this.taskListData)
 
+  updateTaskProperty(
+    listId: string,
+    taskId: string,
+    update: Partial<Task>
+  ) {
+    this.taskLists.update(lists =>
+      lists.map(list =>
+        list.id === listId
+          ? {
+            ...list,
+            tasks: list.tasks.map(task =>
+              task.id === taskId ? { ...task, ...update } : task
+            )
+          }
+          : list
+      )
+    );
+  }
+
+  updateTaskFavorite(taskId: string, listId: string, isFavorite: boolean) {
+    this.updateTaskProperty(listId, taskId, { isFavorite });
+    console.log(taskId, isFavorite);
+  }
+
+  updateTaskComplete(taskId: string, listId: string, isCompleted: boolean) {
+    this.updateTaskProperty(listId, taskId, { isCompleted });
+    console.log(taskId, isCompleted);
+  }
+
   addList(newList: TaskList) {
     this.taskLists.update(lists => [...lists, newList]);
   }
 
   removeList(listId: string) {
+    const list = this.taskLists().find(l => l.id === listId);
+    if (!list) {
+      console.warn(`List ${listId} not found`);
+      return;
+    }
+
+    if (list.isImmutable) {
+      console.error('Cannot delete immutable list');
+      return;
+    }
     this.taskLists.update(lists => lists.filter(item => item.id !== listId));
   }
 
   addTaskToList(task: Task, listId: string) {
+    const targetList = this.taskLists().find(l => l.id === listId);
+
+    if (!targetList) {
+      console.warn(`List ${listId} not found`);
+      return;
+    }
+
+    if (targetList.isImmutable && !targetList.canCreateTask) {
+      console.error('Cannot add tasks to immutable list');
+      return;
+    }
+
     this.taskLists.update(lists =>
       lists.map(list =>
         list.id === listId

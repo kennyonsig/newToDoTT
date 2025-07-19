@@ -1,5 +1,5 @@
 <div class="task-item">
-  <button class="task-item__complete" (click)="toggleCompleteTask(task.id)">
+  <button class="task-item__complete" (click)="toggleCompleteTask()">
     <mat-icon class="task-item__favorite-icon">
       {{ task.isCompleted ? 'done' : 'crop_square' }}
     </mat-icon>
@@ -8,7 +8,7 @@
 
   <button
     class="task-item__favorite"
-    (click)="toggleToFavoriteTask(task.id)"
+    (click)="toggleToFavoriteTask()"
   >
     <mat-icon class="task-item__favorite-icon">
       {{ task.isFavorite ? 'star' : 'star_border' }}

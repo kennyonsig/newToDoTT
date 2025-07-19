@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { TaskList } from '../interface/task';
 import { FormsModule } from '@angular/forms';
-import { TasksListService } from '../services/tasks-list-service';
+import { TasksListService } from '../../services/tasks-list-service';
 import { TaskOnPage } from '../task-on-page/task-on-page';
 import { NgClickOutsideDirective } from 'ng-click-outside2';
 import { AutoFocus } from '../../directives/auto-focus';

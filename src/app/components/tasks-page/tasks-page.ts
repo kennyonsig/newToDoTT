@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 
 import { SearchInput } from '../../shared/search-input/search-input';
 import { TasksList } from '../tasks-list/tasks-list';
-import { TasksListService } from '../services/tasks-list-service';
+import { TasksListService } from '../../services/tasks-list-service';
 import { FormsModule } from '@angular/forms';
 import { NgClickOutsideDirective } from 'ng-click-outside2';
 import { AutoFocus } from '../../directives/auto-focus';

@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Task } from '../interface/task'
 import { DatePipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { TasksListService } from '../../services/tasks-list-service';
 
 @Component({
   selector: 'app-task-on-page',
@@ -13,30 +14,29 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './task-on-page.scss'
 })
 export class TaskOnPage {
+  taskListService = inject(TasksListService)
 
   @Input() task!: Task;
+  @Input() taskListId!: string;
 
   // TODO edit favorite
-  toggleToFavoriteTask(taskId: string) {
+  toggleToFavoriteTask() {
+    this.task.isFavorite = !this.task.isFavorite;
 
-    if (this.task.isFavorite) {
-      this.task.isFavorite = false;
-      console.log('del from fav');
-      return;
-    }
-    console.log(taskId);
-    this.task.isFavorite = true;
+    this.taskListService.updateTaskFavorite(
+      this.task.id,
+      this.taskListId,
+      this.task.isFavorite
+    )
   }
 
   // TODO edit complete
-  toggleCompleteTask(taskId: string) {
-    if (this.task.isCompleted) {
-      this.task.isCompleted = false;
-      console.log('!done');
-      return;
-    }
-    console.log(taskId);
-    this.task.isCompleted = true;
+  toggleCompleteTask() {
+    this.task.isCompleted = !this.task.isCompleted;
+    this.taskListService.updateTaskComplete(
+      this.task.id,
+      this.taskListId,
+      this.task.isCompleted
+    );
   }
-
 }
