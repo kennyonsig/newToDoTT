@@ -30,6 +30,7 @@ export class TasksList {
   createdTask = false;
   isExpanded = true;
   startUpdate = false;
+  showDisplayFlagMenu = false
 
   toggleList() {
     this.isExpanded = !this.isExpanded;
@@ -90,5 +91,15 @@ export class TasksList {
       this.addTask();
       this.createdTask = false;
     }
+
+    this.showDisplayFlagMenu = false;
+  }
+
+  openDisplayFlagMenu() {
+    this.showDisplayFlagMenu = !this.showDisplayFlagMenu;
+  }
+
+  toggleDisplayFlag(flagName: keyof TaskList['displayFlags']) {
+    this.taskList.displayFlags[flagName] = !this.taskList.displayFlags[flagName];
   }
 }

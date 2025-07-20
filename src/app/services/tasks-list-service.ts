@@ -16,7 +16,16 @@ export class TasksListService {
       position: 0,
       expanded: true,
       isImmutable: true,
-      canCreateTask: false
+      canCreateTask: false,
+      displayFlags: {
+        showFavorite: false,
+        showAssignees: true,
+        showAuthor: false,
+        showLocation: true,
+        showCreatedAt: false,
+        showDeadline: true,
+        showStickers: true,
+      }
     },
     {
       id: '2',
@@ -25,7 +34,16 @@ export class TasksListService {
       position: 1,
       expanded: true,
       isImmutable: true,
-      canCreateTask: true
+      canCreateTask: true,
+      displayFlags: {
+        showFavorite: false,
+        showAssignees: true,
+        showAuthor: false,
+        showLocation: true,
+        showCreatedAt: false,
+        showDeadline: true,
+        showStickers: true,
+      }
     },
     {
       id: '3',
@@ -44,7 +62,16 @@ export class TasksListService {
       } ],
       position: 1,
       expanded: true,
-      canCreateTask: true
+      canCreateTask: true,
+      displayFlags: {
+        showFavorite: false,
+        showAssignees: true,
+        showAuthor: false,
+        showLocation: true,
+        showCreatedAt: false,
+        showDeadline: true,
+        showStickers: true,
+      }
     },
   ];
 
@@ -55,28 +82,69 @@ export class TasksListService {
     taskId: string,
     update: Partial<Task>
   ) {
-    this.taskLists.update(lists =>
-      lists.map(list =>
-        list.id === listId
-          ? {
-            ...list,
-            tasks: list.tasks.map(task =>
-              task.id === taskId ? { ...task, ...update } : task
-            )
+    this.taskLists.update(lists => {
+      const listsWithUpdatedTask = lists.map(list => {
+        if (list.id !== listId) return list;
+
+        const updatedTasks = list.tasks.map(task => {
+          return task.id === taskId ? {...task, ...update} : task;
+        });
+
+        return {
+          ...list,
+          tasks: updatedTasks
+        };
+      });
+
+      if (update.isCompleted === true) {
+        const completedTask = this.findTaskInLists(listsWithUpdatedTask, listId, taskId)
+
+        if (completedTask) {
+          const doneList = listsWithUpdatedTask.find(list => list.title === 'Done');
+
+          if (doneList) {
+            return this.moveTaskToDoneList(listsWithUpdatedTask, listId, taskId, doneList.id, completedTask);
           }
-          : list
-      )
-    );
+        }
+      }
+
+      return listsWithUpdatedTask;
+    });
+  }
+
+  findTaskInLists(lists: TaskList[], listId: string, taskId: string) {
+    const list = lists.find(list => list.id === listId);
+    return list?.tasks.find(task => task.id === taskId);
+  }
+
+  moveTaskToDoneList(lists: TaskList[], sourceListId: string, taskId: string, doneListId: string, task: Task): TaskList[] {
+    return lists.map(list => {
+      // Добавление в список завершённых
+      if (list.id === doneListId) {
+        return {
+          ...list,
+          tasks: [...list.tasks, task]
+        };
+      }
+
+      // Удаление из исходного
+      if (list.id === sourceListId) {
+        return {
+          ...list,
+          tasks: list.tasks.filter(task => task.id !== taskId)
+        };
+      }
+
+      return list;
+    });
   }
 
   updateTaskFavorite(taskId: string, listId: string, isFavorite: boolean) {
     this.updateTaskProperty(listId, taskId, { isFavorite });
-    console.log(taskId, isFavorite);
   }
 
   updateTaskComplete(taskId: string, listId: string, isCompleted: boolean) {
     this.updateTaskProperty(listId, taskId, { isCompleted });
-    console.log(taskId, isCompleted);
   }
 
   addList(newList: TaskList) {
@@ -84,7 +152,7 @@ export class TasksListService {
   }
 
   removeList(listId: string) {
-    const list = this.taskLists().find(l => l.id === listId);
+    const list = this.taskLists().find(list => list.id === listId);
     if (!list) {
       console.warn(`List ${listId} not found`);
       return;
@@ -94,22 +162,18 @@ export class TasksListService {
       console.error('Cannot delete immutable list');
       return;
     }
-    this.taskLists.update(lists => lists.filter(item => item.id !== listId));
+
+    this.taskLists.update(lists => {
+      const deletedPosition = list.position;
+      return lists.filter(list => list.id !== listId)
+        .map(list => ({
+          ...list,
+          position: list.position > deletedPosition ? list.position - 1 :list.position
+        }));
+    });
   }
 
   addTaskToList(task: Task, listId: string) {
-    const targetList = this.taskLists().find(l => l.id === listId);
-
-    if (!targetList) {
-      console.warn(`List ${listId} not found`);
-      return;
-    }
-
-    if (targetList.isImmutable && !targetList.canCreateTask) {
-      console.error('Cannot add tasks to immutable list');
-      return;
-    }
-
     this.taskLists.update(lists =>
       lists.map(list =>
         list.id === listId

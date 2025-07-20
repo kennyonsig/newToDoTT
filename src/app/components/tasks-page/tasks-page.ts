@@ -39,13 +39,26 @@ export class TasksPage {
 
     const lists = this.taskLists();
 
+    const nextPosition = lists.length > 0
+      ? Math.max(...lists.map(l => l.position)) + 1
+      : 1;
+
     const newList = {
       id: crypto.randomUUID(),
       title: title,
       tasks: [],
-      position: Math.max(...lists.map(l => l.position), 0) + 1,
+      position: nextPosition,
       expanded: true,
-      canCreateTask:true
+      canCreateTask: true,
+      displayFlags: {
+        showFavorite: false,
+        showAssignees: true,
+        showAuthor: false,
+        showLocation: true,
+        showCreatedAt: false,
+        showDeadline: true,
+        showStickers: true,
+      }
     }
 
     this.tasksListService.addList(newList)

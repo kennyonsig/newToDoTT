@@ -5,6 +5,7 @@
   width: 100%;
   height: 32px;
   padding: 0 8px;
+  user-select: none;
 
   &:hover {
     box-shadow: 0 0 5px #b2b2b2;

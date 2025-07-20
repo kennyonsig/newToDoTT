@@ -115,7 +115,6 @@
   opacity: 0;
   transition: opacity 0.2s ease, visibility 0.2s ease;
   border: 1px solid #6a6767;
-  padding: 2px;
   border-radius: 5px;
 }
 
@@ -126,6 +125,7 @@
 .task-title__container {
   padding-top: 10px;
   padding-left: 40px;
+  user-select: none;
 }
 
 .task-title__input {
@@ -152,4 +152,34 @@ mat-icon {
 
 .immutable-class {
   padding-left: 45px;
+}
+
+.display-flag-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background: #ffffff;
+  min-width: 145px;
+  align-items: start;
+  padding: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  gap: 10px;
+  border-radius: 8px;
+}
+
+.display-flag-menu span {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 16px;
+  color: transparent;
+}
+
+.display-flag-menu span.checked {
+  color: #fff;
+  background-color: #2196F3;
+  border-color: #2196F3;
 }

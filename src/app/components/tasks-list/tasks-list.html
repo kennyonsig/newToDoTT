@@ -40,7 +40,48 @@
       </div>
 
       <div class="list__actions">
-        <button class="list__action"><mat-icon class="list__icon">settings</mat-icon></button>
+        <button class="list__action" (click)="openDisplayFlagMenu()"><mat-icon class="list__icon">settings</mat-icon></button>
+
+        @if (showDisplayFlagMenu) {
+          <div class="display-flag-menu" (clickOutside)="onClickedOutside()">
+            <p>Доступные столбцы таблицы</p>
+
+            <button (click)="toggleDisplayFlag('showFavorite')">
+              <span [class.checked]="taskList.displayFlags.showFavorite">✓</span>
+              Избранное
+            </button>
+
+            <button (click)="toggleDisplayFlag('showAssignees')">
+              <span [class.checked]="taskList.displayFlags.showAssignees">✓</span>
+              Исполнители
+            </button>
+
+            <button (click)="toggleDisplayFlag('showAuthor')">
+              <span [class.checked]="taskList.displayFlags.showAuthor">✓</span>
+              Автор
+            </button>
+
+            <button (click)="toggleDisplayFlag('showLocation')">
+              <span [class.checked]="taskList.displayFlags.showLocation">✓</span>
+              Расположение
+            </button>
+
+            <button (click)="toggleDisplayFlag('showCreatedAt')">
+              <span [class.checked]="taskList.displayFlags.showCreatedAt">✓</span>
+              Дата создания
+            </button>
+
+            <button (click)="toggleDisplayFlag('showDeadline')">
+              <span [class.checked]="taskList.displayFlags.showDeadline">✓</span>
+              Дедлайн
+            </button>
+
+            <button (click)="toggleDisplayFlag('showStickers')">
+              <span [class.checked]="taskList.displayFlags.showStickers">✓</span>
+              Стикеры
+            </button>
+          </div>
+        }
         <button class="list__action"><mat-icon class="list__icon">filter_list</mat-icon></button>
         <button class="list__action"><mat-icon class="list__icon">import_export</mat-icon></button>
         @if (taskList.canCreateTask) {
@@ -60,7 +101,7 @@
       @for (task of taskList.tasks; track task.id) {
         <app-task-on-page
           [task]="task"
-          [taskListId]="taskList.id"
+          [taskList]="taskList"
         ></app-task-on-page>
       }
 

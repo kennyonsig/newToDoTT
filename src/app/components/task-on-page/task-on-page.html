@@ -6,20 +6,32 @@
   </button>
   <p class="task-item__title">{{ task.title }}</p>
 
-  <button
-    class="task-item__favorite"
-    (click)="toggleToFavoriteTask()"
-  >
+  @if (taskList.displayFlags.showFavorite) {
+  <button class="task-item__favorite" (click)="toggleToFavoriteTask()">
     <mat-icon class="task-item__favorite-icon">
       {{ task.isFavorite ? 'star' : 'star_border' }}
     </mat-icon>
   </button>
+  }
 
-  <p class="task-item__assignees">{{ task.assignees }}</p>
-  <p class="task-item__author">{{ task.author }}</p>
-  <p class="task-item__location">{{ task.location }}</p>
-  <p class="task-item__created-at">{{ task.createdAt | date }}</p>
-  <p class="task-item__deadline">{{ task.deadline | date }}</p>
-  <p class="task-item__stickers">{{ task.stickers }}</p>
+  @if (taskList.displayFlags.showAssignees) {
+    <p class="task-item__assignees">{{ task.assignees }}</p>
+  }
+  @if (taskList.displayFlags.showAuthor) {
+    <p class="task-item__author">{{ task.author }}</p>
+  }
+  @if (taskList.displayFlags.showLocation) {
+    <p class="task-item__location">{{ task.location }}</p>
+  }
+  @if (taskList.displayFlags.showCreatedAt) {
+    <p class="task-item__created-at">{{ task.createdAt | date }}</p>
+  }
+  @if (taskList.displayFlags.showDeadline) {
+    <p class="task-item__deadline">{{ task.deadline | date }}</p>
+  }
+  @if (taskList.displayFlags.showStickers) {
+    <p class="task-item__stickers">{{ task.stickers }}</p>
+  }
+
 </div>
 

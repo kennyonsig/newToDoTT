@@ -26,5 +26,14 @@ export interface TaskList {
   position: number;
   expanded: boolean;
   canCreateTask: boolean;
+  displayFlags: {
+    showFavorite: boolean;
+    showAssignees: boolean;
+    showAuthor: boolean;
+    showLocation: boolean;
+    showCreatedAt: boolean;
+    showDeadline: boolean;
+    showStickers: boolean;
+  };
 }
 
