@@ -1,0 +1,31 @@
+.display-flag-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background: #ffffff;
+  min-width: 145px;
+  align-items: start;
+  padding: 11px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  gap: 2px;
+  border-radius: 8px;
+
+  & > button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding-left: 11px;
+  }
+
+  & > p {
+    color: #5f6368;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0 16px 8px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+}
+
+.display-flag-menu mat-icon.checked {
+  color: #216bdc;
+}

@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
-import { Task, TaskList } from '../interface/task'
-import { DatePipe } from '@angular/common';
+import { Task, TaskList } from '../../../interface/task'
+import { DatePipe, NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { TasksListService } from '../../services/tasks-list-service';
 
@@ -9,7 +9,8 @@ import { TasksListService } from '../../services/tasks-list-service';
   selector: 'app-task-on-page',
   imports: [
     DatePipe,
-    MatIcon
+    MatIcon,
+    NgClass
   ],
   templateUrl: './task-on-page.html',
   styleUrl: './task-on-page.scss'
@@ -20,23 +21,30 @@ export class TaskOnPage {
   @Input() task!: Task;
   @Input() taskList!: TaskList;
 
+  taskData= [
+    { key: 'assignees', displayKey: 'showAssignees' },
+    { key: 'author', displayKey: 'showAuthor'},
+    { key: 'location', displayKey: 'showLocation' },
+    { key: 'stickers', displayKey: 'showStickers' },
+  ] as const;
+
 
   toggleToFavoriteTask() {
-    this.task.isFavorite = !this.task.isFavorite;
+    const newState = !this.task.isFavorite;
 
     this.taskListService.updateTaskFavorite(
       this.task.id,
       this.taskList.id,
-      this.task.isFavorite
+      newState
     )
   }
 
   toggleCompleteTask() {
-    this.task.isCompleted = !this.task.isCompleted;
+    const newState = !this.task.isCompleted;
     this.taskListService.updateTaskComplete(
       this.task.id,
       this.taskList.id,
-      this.task.isCompleted
+      newState
     );
   }
 }

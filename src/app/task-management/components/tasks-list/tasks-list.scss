@@ -1,0 +1,21 @@
+@use 'tasks-list-style/flag-menu';
+@use 'tasks-list-style/list-header';
+@use 'tasks-list-style/list-menu';
+@use 'tasks-list-style/task-title';
+
+
+button {
+  color: #8a8a8a;
+
+  &:hover {
+    color: #099bf8;
+  }
+}
+
+mat-icon {
+  transform: scale(0.7);
+}
+
+.immutable-class {
+  padding-left: 37px;
+}

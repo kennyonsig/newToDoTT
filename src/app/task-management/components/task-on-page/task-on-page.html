@@ -1,5 +1,5 @@
 <div class="task-item">
-  <button class="task-item__complete" (click)="toggleCompleteTask()">
+  <button class="task-item__complete" (click)="toggleCompleteTask()" >
     <mat-icon class="task-item__favorite-icon">
       {{ task.isCompleted ? 'done' : 'crop_square' }}
     </mat-icon>
@@ -14,23 +14,17 @@
   </button>
   }
 
-  @if (taskList.displayFlags.showAssignees) {
-    <p class="task-item__assignees">{{ task.assignees }}</p>
-  }
-  @if (taskList.displayFlags.showAuthor) {
-    <p class="task-item__author">{{ task.author }}</p>
-  }
-  @if (taskList.displayFlags.showLocation) {
-    <p class="task-item__location">{{ task.location }}</p>
-  }
   @if (taskList.displayFlags.showCreatedAt) {
     <p class="task-item__created-at">{{ task.createdAt | date }}</p>
   }
   @if (taskList.displayFlags.showDeadline) {
     <p class="task-item__deadline">{{ task.deadline | date }}</p>
   }
-  @if (taskList.displayFlags.showStickers) {
-    <p class="task-item__stickers">{{ task.stickers }}</p>
+
+  @for (taskInfo of taskData; track taskInfo) {
+    @if (taskList.displayFlags[taskInfo.displayKey]) {
+      <p [ngClass]="'task-item__' + taskInfo.key">{{ task[taskInfo.key] }}</p>
+    }
   }
 
 </div>

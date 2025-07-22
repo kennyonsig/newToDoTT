@@ -1,11 +1,12 @@
 import { Component, inject, Input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { TaskList } from '../interface/task';
+import { TaskList } from '../../../interface/task';
 import { FormsModule } from '@angular/forms';
 import { TasksListService } from '../../services/tasks-list-service';
 import { TaskOnPage } from '../task-on-page/task-on-page';
 import { NgClickOutsideDirective } from 'ng-click-outside2';
-import { AutoFocus } from '../../directives/auto-focus';
+import { AutoFocus } from '../../../directives/auto-focus';
+import { NgClass } from '@angular/common';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { AutoFocus } from '../../directives/auto-focus';
     TaskOnPage,
     NgClickOutsideDirective,
     AutoFocus,
+    NgClass,
   ],
   templateUrl: './tasks-list.html',
   styleUrl: './tasks-list.scss'
@@ -32,8 +34,27 @@ export class TasksList {
   startUpdate = false;
   showDisplayFlagMenu = false
 
+
+  flagOptions= [
+    { key: 'showFavorite', label: 'Избранное' },
+    { key: 'showCreatedAt', label: 'Дата создания' },
+    { key: 'showDeadline', label: 'Дедлайн' },
+    { key: 'showAssignees', label: 'Исполнители' },
+    { key: 'showAuthor', label: 'Автор' },
+    { key: 'showLocation', label: 'Расположение' },
+    { key: 'showStickers', label: 'Стикеры' }
+  ] as const;
+
   toggleList() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  openListMenu() {
+    this.isListMenuOpen = !this.isListMenuOpen;
+  }
+
+  openDisplayFlagMenu() {
+    this.showDisplayFlagMenu = !this.showDisplayFlagMenu;
   }
 
   atCreate() {
@@ -48,13 +69,13 @@ export class TasksList {
       id: crypto.randomUUID(),
       title: this.taskTitle,
       assignees: [],
-      deadline: null,
       stickers: [],
       isCompleted: false,
       isFavorite: false,
       author: 'user',
       createdAt: new Date(),
       location: 'Задача без доски',
+      parentListId: this.taskList.id,
     }
 
     this.taskTitle = '';
@@ -64,10 +85,6 @@ export class TasksList {
   removeList(listId: string) {
     this.tasksListService.removeList(listId);
     this.isListMenuOpen = false;
-  }
-
-  openListMenu() {
-    this.isListMenuOpen = !this.isListMenuOpen;
   }
 
   startUpdateTaskTitle() {
@@ -93,10 +110,6 @@ export class TasksList {
     }
 
     this.showDisplayFlagMenu = false;
-  }
-
-  openDisplayFlagMenu() {
-    this.showDisplayFlagMenu = !this.showDisplayFlagMenu;
   }
 
   toggleDisplayFlag(flagName: keyof TaskList['displayFlags']) {

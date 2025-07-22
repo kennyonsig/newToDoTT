@@ -2,21 +2,24 @@ export interface Task {
   id: string;
   title: string;
   assignees: string[];
-  deadline: Date | null;
+  deadline?: Date
   stickers: Sticker[];
   isCompleted: boolean;
   isFavorite: boolean;
   author: string;
   createdAt: Date;
   location: string;
+  parentListId?: string;
 }
+
+type DeviceSticker = 'mobile' | 'web' | 'mobile-web';
+type PrioritySticker = 'critical' | 'major' | 'normal' | 'low';
+type TaskTypeSticker = 'layout' | 'bug'
 
 interface Sticker {
-  id: string;
-  name: string;
-  color?: string;
+  type: 'device' | 'priority' | 'taskType';
+  value: DeviceSticker | PrioritySticker | TaskTypeSticker;
 }
-
 
 export interface TaskList {
   id: string;
@@ -36,4 +39,6 @@ export interface TaskList {
     showStickers: boolean;
   };
 }
+
+
 
