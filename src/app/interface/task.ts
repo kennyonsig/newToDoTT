@@ -12,13 +12,15 @@ export interface Task {
   parentListId?: string;
 }
 
-type DeviceSticker = 'mobile' | 'web' | 'mobile-web';
-type PrioritySticker = 'critical' | 'major' | 'normal' | 'low';
-type TaskTypeSticker = 'layout' | 'bug'
+export type DeviceSticker = 'mobile' | 'web' | 'mobile-web';
+export type PrioritySticker = 'critical' | 'major' | 'normal' | 'low';
+export type TaskTypeSticker = 'layout' | 'bug'
+export type StickerType = 'device' | 'priority' | 'taskType';
 
-interface Sticker {
-  type: 'device' | 'priority' | 'taskType';
-  value: DeviceSticker | PrioritySticker | TaskTypeSticker;
+export interface Sticker {
+  stickerId: string;
+  type: StickerType;
+  value?: DeviceSticker | PrioritySticker | TaskTypeSticker;
 }
 
 export interface TaskList {

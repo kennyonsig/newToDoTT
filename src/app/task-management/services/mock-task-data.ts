@@ -47,9 +47,9 @@ export const taskListMock: TaskList[] = [
         assignees: ["user-1", "user-2"],
         deadline: new Date("2023-12-15"),
         stickers: [
-          { type: "device", value: "mobile" },
-          { type: "priority", value: "major" },
-          { type: "taskType", value: "bug" }
+          {stickerId: '0', type: "device", value: "mobile" },
+          {stickerId: '1', type: "priority", value: "major" },
+          {stickerId: '2', type: "taskType", value: "bug" }
         ],
         isCompleted: false,
         isFavorite: true,
@@ -63,8 +63,9 @@ export const taskListMock: TaskList[] = [
         title: "Сверстать новую страницу",
         assignees: ["user-4"],
         stickers: [
-          { type: "device", value: "web" },
-          { type: "taskType", value: "layout" }
+          {stickerId: '3', type: "device", value: "web" },
+          {stickerId: '4', type: "taskType", value: "layout" },
+          {stickerId: '5', type: "priority", value: "critical" }
         ],
         isCompleted: false,
         isFavorite: false,
@@ -89,16 +90,16 @@ export const taskListMock: TaskList[] = [
   },
   {
     id: "list-2",
-    title: "Выполнено",
+    title: "Дела",
     tasks: [
       {
         id: "task-3",
         title: "Обновить документацию",
         assignees: ["user-5"],
         stickers: [
-          { type: "priority", value: "low" }
+          {stickerId: '123', type: "priority", value: "low" }
         ],
-        isCompleted: true,
+        isCompleted: false,
         isFavorite: false,
         author: "user-2",
         createdAt: new Date("2023-11-10"),
@@ -108,8 +109,7 @@ export const taskListMock: TaskList[] = [
     ],
     position: 3,
     expanded: false,
-    canCreateTask: false,
-    isImmutable: true,
+    canCreateTask: true,
     displayFlags: {
       showFavorite: false,
       showAssignees: true,

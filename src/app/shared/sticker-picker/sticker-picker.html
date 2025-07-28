@@ -1,0 +1,73 @@
+<div class="menu-wrapper" (clickOutside)="closeAllMenu()">
+
+  @if (stickers.length > 0) {
+    @for (sticker of stickers; track sticker.stickerId) {
+      <div class="sticker-wrapper">
+        <button class="sticker sticker--{{sticker.value}}"
+                (click)="toggleStickerMenu(sticker.stickerId, sticker.type)">{{sticker.value}}</button>
+
+        @if (isMenuOpenForSticker(sticker.stickerId, 'taskType')) {
+          <div class="submenu task-type-submenu">
+            <button (click)="addSticker('taskType', 'layout')">Layout</button>
+            <button (click)="addSticker('taskType', 'bug')">Bug</button>
+          </div>
+        }
+
+        @if (isMenuOpenForSticker(sticker.stickerId, 'priority')) {
+          <div class="submenu priority-submenu">
+            <button (click)="addSticker('priority', 'critical')">Critical</button>
+            <button (click)="addSticker('priority', 'major')">Major</button>
+            <button (click)="addSticker('priority', 'normal')">Normal</button>
+            <button (click)="addSticker('priority', 'low')">Low</button>
+          </div>
+        }
+
+        @if (isMenuOpenForSticker(sticker.stickerId, 'device')) {
+          <div class="submenu device-submenu">
+            <button class="menu-button" (click)="addSticker('device', 'mobile')">Mobile</button>
+            <button class="menu-button" (click)="addSticker('device', 'web')">Web</button>
+            <button class="menu-button" (click)="addSticker('device', 'mobile-web')">Mobile&Web</button>
+          </div>
+        }
+      </div>
+    }
+  }
+
+  <div class="menu-wrapper-action">
+    @if (stickers.length !== 3) {
+      <button class="add-sticker-button" (click)="openMainMenu()">Добавить стикер</button>
+    }
+
+    @if (showMainMenu) {
+      <div class="menu" (clickOutside)="closeAllMenu()">
+        <button class="menu-button" (click)="openSubMenu('device')">Устройство</button>
+        <button class="menu-button" (click)="openSubMenu('priority')">Приоритет</button>
+        <button class="menu-button" (click)="openSubMenu('taskType')">Тип задачи</button>
+      </div>
+    }
+
+    @if (showDeviceSubMenu) {
+      <div class="submenu device-submenu">
+        <button class="menu-button" (click)="addSticker('device', 'mobile')">Mobile</button>
+        <button class="menu-button" (click)="addSticker('device', 'web')">Web</button>
+        <button class="menu-button" (click)="addSticker('device', 'mobile-web')">Mobile&Web</button>
+      </div>
+    }
+
+    @if (showPrioritySubMenu) {
+      <div class="submenu priority-submenu">
+        <button (click)="addSticker('priority', 'critical')">Critical</button>
+        <button (click)="addSticker('priority', 'major')">Major</button>
+        <button (click)="addSticker('priority', 'normal')">Normal</button>
+        <button (click)="addSticker('priority', 'low')">Low</button>
+      </div>
+    }
+
+    @if (showTaskTypeSubMenu) {
+      <div class="submenu task-type-submenu">
+        <button (click)="addSticker('taskType', 'layout')">Layout</button>
+        <button (click)="addSticker('taskType', 'bug')">Bug</button>
+      </div>
+    }
+  </div>
+</div>

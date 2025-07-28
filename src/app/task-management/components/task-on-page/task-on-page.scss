@@ -1,11 +1,12 @@
 .task-item {
   display: flex;
-  gap: 8px;
+  gap: 5px;
   align-items: center;
   width: 100%;
   height: 32px;
   padding: 0 8px;
   user-select: none;
+  font-size: 16px;
 
   &:hover {
     box-shadow: 0 0 5px #b2b2b2;
@@ -18,39 +19,36 @@
     text-overflow: ellipsis;
   }
 
-  &__complete {
-    flex-basis: 1%;
+  &__icon {
+    transform: scale(0.8);
+    color: rgba(114, 114, 114, 0.74);
   }
 
-  &__title {
+  &__title, {
     flex-basis: 25%;
-  }
-
-  &__favorite {
-    flex-basis: 1%;
-  }
-
-  &__assignees {
-    flex-basis: 10%;
-  }
-
-  &__author {
-    flex-basis: 10%;
-  }
-
-  &__location {
-    flex-basis: 10%;
-  }
-
-  &__created-at {
-    flex-basis: 10%;
-  }
-
-  &__deadline {
-    flex-basis: 10%;
   }
 
   &__stickers {
     flex-basis: 20%;
   }
+
+  &__complete, &__favorite {
+    flex-basis: 24px;
+  }
+
+  &__assignees,
+  &__author,
+  &__location,
+  &__created-at,
+  &__deadline   {
+    flex-basis: 10%;
+  }
+}
+
+.completed {
+  color: #07c707;
+}
+
+.favorite {
+  color: #fbe220;
 }

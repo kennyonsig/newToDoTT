@@ -12,18 +12,11 @@
   &__info {
     display: flex;
     gap: 20px;
-    align-items: center;
     position: relative;
   }
 
   &__info-section {
     display: flex;
-    align-items: center;
-
-    &--left {
-      display: flex;
-      align-items: center;
-    }
   }
 
   &__main {
@@ -36,14 +29,16 @@
 
   &__title-wrapper {
     display: flex;
-    align-items: center;
     gap: 5px;
   }
 
   &__title-text {
     font-size: 20px;
     font-weight: bold;
-    max-width: 330px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
   }
 
   &__counter {
@@ -53,19 +48,19 @@
     border-radius: 5px;
     font-size: 12px;
     font-weight: 600;
+    height: 21px;
   }
 }
 
 .list__main-header {
   display: flex;
-  gap: 8px;
   width: 100%;
-  padding-left: 48px;
-  padding-bottom: 5px;
+  padding: 0 8px 4px 8px;
   font-size: 12px;
   border-bottom: 1px solid #e7e7e7;
   align-items: flex-end;
   color: #8a8a8a;
+  gap: 5px;
 
   p {
     white-space: nowrap;
@@ -73,40 +68,28 @@
     text-overflow: ellipsis;
   }
 
-  &__complete {
-    flex-basis: 1%;
+  &__showFavorite {
+    visibility: hidden;
   }
 
   &__title {
     flex-basis: 25%;
   }
 
-  &__showFavorite {
-    flex-basis: 1%;
-    visibility: hidden;
-  }
-
-  &__showAssignees {
-    flex-basis: 10%;
-  }
-
-  &__showAuthor {
-    flex-basis: 10%;
-  }
-
-  &__showLocation {
-    flex-basis: 10%;
-  }
-
-  &__showCreatedAt {
-    flex-basis: 10%;
-  }
-
-  &__showDeadline {
-    flex-basis: 10%;
-  }
-
   &__showStickers{
     flex-basis: 20%;
+  }
+
+  &__toggle,
+  &__showFavorite {
+    flex-basis: 24px;
+  }
+
+  &__showAssignees,
+  &__showAuthor,
+  &__showLocation,
+  &__showCreatedAt,
+  &__showDeadline {
+    flex-basis: 10%;
   }
 }

@@ -40,7 +40,7 @@ export class TasksPage {
     const lists = this.taskLists();
 
     const nextPosition = lists.length > 0
-      ? Math.max(...lists.map(l => l.position)) + 1
+      ? Math.max(...lists.map(list => list.position)) + 1
       : 1;
 
     const newList = {

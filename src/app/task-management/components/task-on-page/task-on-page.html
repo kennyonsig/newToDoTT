@@ -1,6 +1,6 @@
 <div class="task-item">
   <button class="task-item__complete" (click)="toggleCompleteTask()" >
-    <mat-icon class="task-item__favorite-icon">
+    <mat-icon class="task-item__icon" [class.completed]="task.isCompleted">
       {{ task.isCompleted ? 'done' : 'crop_square' }}
     </mat-icon>
   </button>
@@ -8,7 +8,7 @@
 
   @if (taskList.displayFlags.showFavorite) {
   <button class="task-item__favorite" (click)="toggleToFavoriteTask()">
-    <mat-icon class="task-item__favorite-icon">
+    <mat-icon class="task-item__icon" [class.favorite]="task.isFavorite">
       {{ task.isFavorite ? 'star' : 'star_border' }}
     </mat-icon>
   </button>
@@ -25,6 +25,10 @@
     @if (taskList.displayFlags[taskInfo.displayKey]) {
       <p [ngClass]="'task-item__' + taskInfo.key">{{ task[taskInfo.key] }}</p>
     }
+  }
+
+  @if (taskList.displayFlags.showStickers) {
+    <app-sticker-picker [stickers]="task.stickers"></app-sticker-picker>
   }
 
 </div>

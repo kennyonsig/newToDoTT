@@ -1,0 +1,155 @@
+.menu-wrapper {
+  display: flex;
+  gap: 5px;
+}
+
+.menu-wrapper-action {
+  position: relative;
+}
+
+
+.menu, .submenu {
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+}
+
+button {
+  padding: 4px 12px;
+  width: 100%;
+  text-align: left;
+}
+
+.add-sticker-button:hover {
+  background-color: rgba(184, 180, 180, 0.26);
+  border-radius: 16px;
+}
+
+.menu-button:hover {
+  border-radius: 0;
+  background-color: rgba(184, 180, 180, 0.26);
+}
+
+.device-submenu {
+  button {
+    // mobile
+    &:nth-child(1):hover {
+      background: #ad1ddd69;
+      color: #6c038f;
+    }
+    // web
+    &:nth-child(2):hover {
+      background: rgba(17, 201, 185, 0.57);
+      color: #006b64;
+    }
+    // mobile-web
+    &:nth-child(3):hover {
+      background: rgba(0, 182, 225, 0.45);
+      color: rgba(3, 80, 98, 0.67);
+    }
+  }
+}
+
+.priority-submenu {
+  button {
+    // critical
+    &:nth-child(1):hover {
+      background: rgb(249, 126, 126);
+      color: rgb(215, 1, 15);
+    }
+    // major;
+    &:nth-child(2):hover {
+      background: rgba(255, 144, 0, 0.61);
+      color: #ca7200
+    }
+    // normal
+    &:nth-child(3):hover {
+      background: #cddc0f;
+      color: #767e05;
+    }
+    // low
+    &:nth-child(4):hover {
+      background: #24a727a6;
+      color: #006e03;
+    }
+  }
+}
+
+.task-type-submenu {
+  button {
+    // layout
+    &:nth-child(1):hover {
+      background: #606bee9c;
+      color: #17229b;
+    }
+    // bug
+    &:nth-child(2):hover {
+      background: rgba(243, 29, 255, 0.66);
+      color: rgb(155, 0, 163);
+    }
+  }
+}
+
+.sticker {
+  border-radius: 16px;
+  font-size: 12px;
+  text-transform: uppercase;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    opacity: .6;
+  }
+
+  // Устройства
+  &--mobile {
+    background: #ad1ddd69;
+    color: #6c038f;
+  }
+
+  &--web {
+    background: rgba(17, 201, 185, 0.57);
+    color: #006b64;
+  }
+
+  &--mobile-web {
+    background: rgba(0, 182, 225, 0.45);
+    color: rgba(3, 80, 98, 0.67);
+  }
+
+  // Приоритеты
+  &--critical {
+    background: rgb(249, 126, 126);
+    color: rgb(215, 1, 15);
+  }
+
+  &--major {
+    background: rgba(255, 144, 0, 0.61);
+    color: #ca7200
+  }
+
+  &--normal {
+    background: #cddc0f;
+    color: #767e05;
+  }
+
+  &--low {
+    background: #24a727a6;
+    color: #006e03;
+  }
+
+  // Типы
+  &--layout {
+    background: #606bee9c;
+    color: #17229b;
+  }
+
+  &--bug {
+    background: rgba(243, 29, 255, 0.66);
+    color: rgb(155, 0, 163);
+  }
+}
+

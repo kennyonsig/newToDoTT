@@ -3,6 +3,7 @@ import { Task, TaskList } from '../../../interface/task'
 import { DatePipe, NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { TasksListService } from '../../services/tasks-list-service';
+import { StickerPicker } from '../../../shared/sticker-picker/sticker-picker';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { TasksListService } from '../../services/tasks-list-service';
   imports: [
     DatePipe,
     MatIcon,
-    NgClass
+    NgClass,
+    StickerPicker
   ],
   templateUrl: './task-on-page.html',
   styleUrl: './task-on-page.scss'
@@ -25,7 +27,6 @@ export class TaskOnPage {
     { key: 'assignees', displayKey: 'showAssignees' },
     { key: 'author', displayKey: 'showAuthor'},
     { key: 'location', displayKey: 'showLocation' },
-    { key: 'stickers', displayKey: 'showStickers' },
   ] as const;
 
 

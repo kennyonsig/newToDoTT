@@ -10,7 +10,12 @@
 
 html, body {
   height: 100%;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'JetBrains Sans', 'Segoe UI', Roboto, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #333;
 }
 
 

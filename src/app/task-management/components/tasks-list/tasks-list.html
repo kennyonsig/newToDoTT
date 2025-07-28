@@ -28,9 +28,9 @@
             <input class="list__title-input"
                    type="text"
                    [(ngModel)]="taskList.title"
-                   (keyup.enter)="updateTaskTitle()"
                    (clickOutside)="onClickedOutside()"
                    appAutoFocus
+                   (keyup.enter)="updateTaskTitle()"
             >
           } @else {
             <p class="list__title-text">{{ taskList.title }}</p>
@@ -56,7 +56,6 @@
             }
           </div>
         }
-        <button class="list__action"><mat-icon class="list__icon">filter_list</mat-icon></button>
         <button class="list__action"><mat-icon class="list__icon">import_export</mat-icon></button>
         @if (taskList.canCreateTask) {
           <button class="list__action" (click)="atCreate()"><mat-icon class="list__icon">add_box</mat-icon></button>
@@ -65,16 +64,18 @@
     </div>
 
     <div class="list__move">
-      <button class="list__move-button"><mat-icon>keyboard_arrow_up</mat-icon></button>
-      <button class="list__move-button"><mat-icon>keyboard_arrow_down</mat-icon></button>
+      <button class="list__move-button" (click)="upList()"><mat-icon>keyboard_arrow_up</mat-icon></button>
+      <button class="list__move-button" (click)="downList()"><mat-icon>keyboard_arrow_down</mat-icon></button>
     </div>
   </div>
+
 
   <div class="list__main">
     @if (isExpanded) {
 
       @if (taskList.tasks.length > 0) {
         <div class="list__main-header">
+          <span class="list__main-header__toggle"></span>
           <p class="list__main-header__title">Название задачи</p>
 
           @for (option of flagOptions; track option) {

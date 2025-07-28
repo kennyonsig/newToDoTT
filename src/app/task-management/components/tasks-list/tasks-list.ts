@@ -9,6 +9,7 @@ import { AutoFocus } from '../../../directives/auto-focus';
 import { NgClass } from '@angular/common';
 
 
+
 @Component({
   selector: 'app-tasks-list',
   imports: [
@@ -91,6 +92,7 @@ export class TasksList {
     this.startUpdate = !this.startUpdate;
     this.isListMenuOpen = false;
   }
+
   // TODO updateTaskTitle
   updateTaskTitle() {
     console.log('Updated title:', this.taskList.title);
@@ -114,5 +116,14 @@ export class TasksList {
 
   toggleDisplayFlag(flagName: keyof TaskList['displayFlags']) {
     this.taskList.displayFlags[flagName] = !this.taskList.displayFlags[flagName];
+  }
+
+  //TODO up/down list
+  upList() {
+
+  }
+
+  downList() {
+
   }
 }
